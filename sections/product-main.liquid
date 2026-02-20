@@ -178,6 +178,43 @@
       font-size: 2rem;
     }
   }
+
+  .product-shipping-info {
+    margin-bottom: 24px;
+    border: 1px solid rgba(180,150,120,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .shipping-info-header {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #2C1F14;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    background: #FAF7F3;
+    border-bottom: 1px solid rgba(180,150,120,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .shipping-info-body {
+    padding: 16px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: #5C4535;
+    line-height: 1.8;
+    background: #ffffff;
+  }
+
+  .shipping-info-body strong {
+    color: #C8813A;
+    font-weight: 500;
+  }
 </style>
 
 <section class="product-main">
@@ -202,9 +239,26 @@
       </p>
 
       {% if product.description != blank %}
-        <div class="product-description-main">
+        <div class="product-description-main" id="product-desc-clean">
           {{ product.description }}
         </div>
+        <script>
+          (function() {
+            var desc = document.getElementById('product-desc-clean');
+            if (!desc) return;
+            // Remove <p> or <li> nodes whose text starts with "1." or "2."
+            desc.querySelectorAll('p, li').forEach(function(el) {
+              var t = el.innerText || el.textContent || '';
+              if (/^\s*[12]\.\s/.test(t.trim())) {
+                el.remove();
+              }
+            });
+            // Also remove any <ol> that becomes empty
+            desc.querySelectorAll('ol').forEach(function(ol) {
+              if (ol.querySelectorAll('li').length === 0) ol.remove();
+            });
+          })();
+        </script>
       {% endif %}
 
       {% form 'product', product, id: 'product-form', class: 'product-form' %}
@@ -230,6 +284,15 @@
           <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
             <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
             <span style="font-family: 'Jost', sans-serif; font-size: 0.9rem; color: #888; font-weight: 400;">Standard size 1 fl. oz. (30mL)</span>
+          </div>
+        </div>
+
+
+        <div class="product-shipping-info">
+          <div class="shipping-info-header">📦 &nbsp;Shipping &amp; Delivery</div>
+          <div class="shipping-info-body">
+            <strong>Want Free Shipping? 🌿</strong><br>
+            You're only $20 away! Upgrade to the Glow Duo for $49 to unlock Free Shipping + Save $9 on your second bottle.
           </div>
         </div>
 
