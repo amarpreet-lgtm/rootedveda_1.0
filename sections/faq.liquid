@@ -1,0 +1,483 @@
+<style>
+  .rv-faq {
+    padding: 100px 20px;
+    background: #FAF7F3;
+    min-height: 80vh;
+  }
+
+  .rv-faq-container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .rv-faq-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #C8813A;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .rv-faq-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 400;
+    color: #2C1F14;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .rv-faq-subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #8C7060;
+    text-align: center;
+    margin-bottom: 70px;
+    line-height: 1.8;
+  }
+
+  .rv-faq-category {
+    margin-bottom: 56px;
+  }
+
+  .rv-faq-category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2C1F14;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(200,129,58,0.25);
+  }
+
+  .rv-faq-item {
+    border-bottom: 1px solid rgba(180,150,120,0.15);
+    overflow: hidden;
+  }
+
+  .rv-faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: pointer;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .rv-faq-question-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2C1F14;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .rv-faq-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 2px;
+  }
+
+  .rv-faq-icon::before,
+  .rv-faq-icon::after {
+    content: '';
+    position: absolute;
+    background: #C8813A;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .rv-faq-icon::before {
+    width: 14px;
+    height: 1.5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .rv-faq-icon::after {
+    width: 1.5px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .rv-faq-item.open .rv-faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .rv-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .rv-faq-item.open .rv-faq-answer {
+    max-height: 2000px;
+  }
+
+  .rv-faq-answer-inner {
+    padding: 0 0 24px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: #5C4535;
+    line-height: 1.95;
+  }
+
+  .rv-faq-answer-inner p {
+    margin-bottom: 14px;
+  }
+
+  .rv-faq-answer-inner p:last-child {
+    margin-bottom: 0;
+  }
+
+  .rv-faq-answer-inner strong {
+    color: #2C1F14;
+    font-weight: 500;
+  }
+
+  .rv-faq-answer-inner em {
+    color: #C8813A;
+    font-style: italic;
+  }
+
+  .rv-faq-answer-inner ul, 
+  .rv-faq-answer-inner ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+  }
+
+  .rv-faq-answer-inner li {
+    margin-bottom: 8px;
+  }
+
+  .rv-faq-answer-inner .ingredient-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .rv-faq-answer-inner .ingredient-card {
+    background: #ffffff;
+    border: 1px solid rgba(200,129,58,0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  .rv-faq-answer-inner .ingredient-card strong {
+    display: block;
+    color: #C8813A;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .rv-faq-answer-inner .step-block {
+    background: #ffffff;
+    border-left: 3px solid #C8813A;
+    padding: 14px 18px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .rv-faq-answer-inner .step-block strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #2C1F14;
+  }
+
+  .rv-faq-answer-inner .dosha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .rv-faq-answer-inner .dosha-card {
+    background: #ffffff;
+    border: 1px solid rgba(200,129,58,0.18);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+  }
+
+  .rv-faq-answer-inner .dosha-card strong {
+    display: block;
+    color: #C8813A;
+    margin-bottom: 4px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .rv-faq-title { font-size: 2.2rem; }
+    .rv-faq-answer-inner .ingredient-grid { grid-template-columns: 1fr; }
+    .rv-faq-answer-inner .dosha-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="rv-faq">
+  <div class="rv-faq-container">
+
+    <p class="rv-faq-eyebrow">Rooted Veda</p>
+    <h1 class="rv-faq-title">Frequently Asked Questions</h1>
+    <p class="rv-faq-subtitle">Everything you need to know about Nature's Botox and the ancient wisdom behind it.</p>
+
+    <!-- CATEGORY 1 -->
+    <div class="rv-faq-category">
+      <h2 class="rv-faq-category-title">Ayurveda &amp; Your Skin</h2>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">What makes this "Nature's Botox"?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Traditional Botox works by <strong>freezing muscles</strong> by injection. Our Ayurvedic oil works by <strong>revitalizing them</strong> using a blend of "The Four Core."</p>
+            <div class="ingredient-grid">
+              <div class="ingredient-card"><strong>Organic Jojoba</strong>To balance — mimics natural sebum to balance oil production.</div>
+              <div class="ingredient-card"><strong>Organic Almond</strong>To glow — brightens complexion and fades dark spots.</div>
+              <div class="ingredient-card"><strong>Organic Castor</strong>To plump — plumps deep tissues and stimulates collagen.</div>
+              <div class="ingredient-card"><strong>Organic Frankincense</strong>To lift — tightens pores and speeds up cell renewal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">The Core Four: What does each ingredient actually do?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p><strong>1. Jojoba Oil — The Balancer</strong><br>In Ayurveda, Jojoba is known for its Tridoshic nature. Its molecular structure is nearly identical to human sebum. It acts as a "smart" oil — dissolving congestion in oily (Kapha) skin, while providing a protective barrier for dry (Vata) skin. It ensures the formula is delivered deep into the dermis without leaving a greasy residue.</p>
+            <p><strong>2. Sweet Almond Oil — The Nourisher</strong><br>Referred to as <em>Badam Taila</em> in Ayurveda, it is rich in Vitamins E and A and prized for its oleation properties. It softens skin, fades dark spots and under-eye circles, and is especially grounding for Vata types who struggle with fine lines.</p>
+            <p><strong>3. Castor Oil — The Renewer</strong><br>Traditionally used as a "Srotas" channel cleanser. It contains ricinoleic acid, which pulls moisture into the skin, providing the physical plumping effect that fills in deep-set wrinkles and stimulates production of collagen and elastin.</p>
+            <p><strong>4. Frankincense Essential Oil — The Sacred Healer</strong><br>Known as <em>Boswellia</em>, used for millennia in sacred rituals. It is a natural astringent that tightens and lifts the skin, speeds up skin cell rejuvenation, and acts as a powerful anti-inflammatory for sensitive (Pitta) skin — reducing redness and smoothing texture.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Is this oil safe for my skin type?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Yes. Nature's Botox is formulated to be <strong>Tridoshic</strong> — carefully balanced for all three Doshas and safe for every skin type. Because we use 100% pure, organic, cold-pressed oils with zero synthetic fragrances or harsh preservatives, our formula is particularly gentle on sensitive skin.</p>
+            <div class="dosha-grid">
+              <div class="dosha-card"><strong>Vata / Dry</strong>Provides deep, grounding hydration and elasticity.</div>
+              <div class="dosha-card"><strong>Pitta / Sensitive</strong>Naturally cooling botanicals soothe redness and calm irritation.</div>
+              <div class="dosha-card"><strong>Kapha / Oily</strong>Lightweight, non-comedogenic oils balance sebum without clogging pores.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Sensitive Skin Transition Guide — how do I start?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Switching to a 100% pure botanical ritual is a beautiful gift for sensitive skin. Follow this 3-step introduction for your most comfortable glow yet.</p>
+            <div class="step-block"><strong>Step 1 — The Patch Test (First 24 Hours)</strong>Apply 1 drop to the inside of your wrist or behind your ear. Wait 24 hours to ensure your skin is ready for the high-potency Frankincense and Castor oils.</div>
+            <div class="step-block"><strong>Step 2 — The "Damp Skin" Rule</strong>Never apply to bone-dry skin. Mist your face with pure water or rose hydrosol first, then press 2 drops into your palms and gently pat onto your face. The water acts as a carrier, helping the oil absorb faster.</div>
+            <div class="step-block"><strong>Step 3 — Ease In</strong>Days 1–3: Apply once a day (preferably at night). Day 4+: Once your skin feels balanced and calm, move to twice-daily use for the full "Nature's Botox" effect.</div>
+            <p style="margin-top:16px;"><strong>What to expect:</strong> You may feel a slight warmth — this is the Frankincense increasing circulation. In the first week, skin might purge old impurities as Jojoba clears your pores. After 14 days, redness typically subsides, leaving behind a firm, resilient complexion.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Is this safe for oily or acne-prone skin?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Yes. A common misconception is that oil causes breakouts — in reality, <strong>imbalances</strong> do. We use lightweight, non-comedogenic oils like cold-pressed Jojoba that mimic your skin's natural sebum. This signals your pores to stop overproducing oil, helping to balance and clear your complexion.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">How long does it take to see results?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Many users notice an immediate "Ayurvedic glow" and improved hydration after the first few uses. Structural changes — like firmer skin and softened lines — typically unfold over <strong>8 to 12 weeks</strong> of consistent daily ritual.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY 2 -->
+    <div class="rv-faq-category">
+      <h2 class="rv-faq-category-title">The Ritual — How to Use</h2>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">When should I apply the oil in my routine?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Apply <strong>2–4 drops</strong> to clean, slightly damp skin. Because our oil is 100% pure and free of water-based fillers, applying it to damp skin helps lock in moisture and aids absorption.</p>
+            <p><strong>Morning:</strong> Use a light layer for a radiant base and environmental protection. Follow with sunscreen.<br>
+            <strong>Night:</strong> Use a slightly more generous amount to support your skin's natural overnight repair cycle.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Can I use this with a Gua Sha or facial roller?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Absolutely — we encourage it. The oil provides the perfect "slip" for facial massage, which boosts circulation and lymphatic drainage, enhancing the "Botox" effect by toning the underlying facial muscles.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY 3 -->
+    <div class="rv-faq-category">
+      <h2 class="rv-faq-category-title">Purity &amp; Ethics</h2>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Why do you use cold-pressed oils?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Heat is the enemy of nutrition. Standard refined oils are processed with high heat and chemicals, which destroys their vitamins and antioxidants. Our cold-pressing method keeps the molecular integrity of the plants intact, ensuring every drop is <em>"living" medicine</em> for your skin.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Why do you use amber glass bottles?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>We choose amber glass for two vital reasons:</p>
+            <p><strong>Protection from Light:</strong> The amber tint acts as a natural filter, blocking harmful UV rays that would otherwise oxidize and degrade our delicate cold-pressed oils — keeping nutrients active and powerful for longer.</p>
+            <p><strong>Zero Microplastics:</strong> Unlike plastic containers, glass is chemically inert. There is no risk of microplastics or synthetic chemicals leaching into the oil. The purity of our Ayurvedic formula remains 100% untainted from the moment it's bottled until it reaches your skin.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">Why are there no preservatives?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Preservatives are only necessary when a product contains water (which breeds bacteria). By bottling 100% pure oils with zero water-based fillers, we create a <strong>naturally shelf-stable product</strong> that doesn't require synthetic chemicals to stay fresh.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">What does "uncompromising zero-waste" mean for my order?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>It means we've audited every step of our footprint. We use glass bottles instead of plastic and biodegradable shipping materials. We believe that glowing skin should never come at the cost of a cluttered planet.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY 4 -->
+    <div class="rv-faq-category">
+      <h2 class="rv-faq-category-title">Storage &amp; Care</h2>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">How should I store my oil?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Since our oils are raw and organic, they are sensitive to light and heat. Keep your bottle in a <strong>cool, dry place away from direct sunlight</strong> to preserve the potency of the botanicals.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-faq-item">
+        <button class="rv-faq-question">
+          <span class="rv-faq-question-text">What is the shelf life?</span>
+          <span class="rv-faq-icon"></span>
+        </button>
+        <div class="rv-faq-answer">
+          <div class="rv-faq-answer-inner">
+            <p>Because of the high antioxidant content in our cold-pressed seeds, our oil stays potent for <strong>12 months after opening</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.rv-faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.rv-faq-item');
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.rv-faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": []
+}
+{% endschema %}
