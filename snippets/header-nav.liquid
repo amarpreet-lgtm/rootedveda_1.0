@@ -1,0 +1,228 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap');
+
+  .rv-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    padding: 0 50px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  }
+
+  .rv-header.scrolled {
+    background: rgba(30, 22, 16, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(212,168,83,0.12);
+  }
+
+  .rv-header-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .rv-header-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(212,168,83,0.2));
+  }
+
+  .rv-header-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #F7F2EA;
+    letter-spacing: 1px;
+  }
+
+  .rv-nav {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+
+  .rv-nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.6);
+    text-decoration: none;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: color 0.25s;
+    position: relative;
+    padding-bottom: 3px;
+  }
+
+  .rv-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: #D4A853;
+    transition: width 0.3s ease;
+  }
+
+  .rv-nav a:hover, .rv-nav a.active { color: #F7F2EA; }
+  .rv-nav a:hover::after, .rv-nav a.active::after { width: 100%; }
+
+  .rv-header-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .rv-header-cart {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: rgba(247,242,234,0.6);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  .rv-header-cart:hover { color: #D4A853; }
+
+  .rv-header-shop {
+    padding: 8px 20px;
+    border: 1px solid rgba(212,168,83,0.5);
+    color: #D4A853;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+
+  .rv-header-shop:hover {
+    background: #D4A853;
+    color: #1E1610;
+  }
+
+  .rv-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .rv-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: rgba(247,242,234,0.7);
+    transition: all 0.3s ease;
+  }
+
+  .rv-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .rv-hamburger.open span:nth-child(2) { opacity: 0; }
+  .rv-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .rv-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: rgba(30,22,16,0.97);
+    backdrop-filter: blur(20px);
+    padding: 36px 50px;
+    flex-direction: column;
+    gap: 0;
+    z-index: 998;
+    border-top: 1px solid rgba(212,168,83,0.1);
+  }
+
+  .rv-mobile-menu.open { display: flex; }
+
+  .rv-mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(247,242,234,0.65);
+    text-decoration: none;
+    transition: color 0.25s;
+    border-bottom: 1px solid rgba(247,242,234,0.07);
+    padding: 18px 0;
+  }
+
+  .rv-mobile-menu a:hover { color: #D4A853; }
+
+  @media (max-width: 860px) {
+    .rv-header { padding: 0 24px; }
+    .rv-nav, .rv-header-shop { display: none; }
+    .rv-hamburger { display: flex; }
+  }
+</style>
+
+<header class="rv-header" id="rv-header">
+  <a href="{{ routes.root_url }}" class="rv-header-logo">
+    {% comment %}no logo in snippet{% endcomment %}{% if false %}
+      
+    {% else %}
+      <span class="rv-header-logo-text">{{ shop.name }}</span>
+    {% endif %}
+  </a>
+
+  <nav>
+    <ul class="rv-nav">
+      <li><a href="{{ routes.root_url }}" {% if template.name == 'index' %}class="active"{% endif %}>Home</a></li>
+      <li><a href="/collections/all" {% if template.name == 'collection' %}class="active"{% endif %}>Shop</a></li>
+      <li><a href="/pages/our-commitment">Our Commitment</a></li>
+      <li><a href="/pages/our-story">Our Story</a></li>
+    </ul>
+  </nav>
+
+  <div class="rv-header-right">
+    <a href="{{ routes.cart_url }}" class="rv-header-cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cart
+    </a>
+    <a href="/collections/all" class="rv-header-shop">Shop Now</a>
+    <button class="rv-hamburger" id="rv-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="rv-mobile-menu" id="rv-mobile-menu">
+  <a href="{{ routes.root_url }}">Home</a>
+  <a href="/collections/all">Shop</a>
+  <a href="/pages/our-commitment">Our Commitment</a>
+  <a href="/pages/our-story">Our Story</a>
+  <a href="{{ routes.cart_url }}">Cart</a>
+</div>
+
+<script>
+  const rvHeader = document.getElementById('rv-header');
+  window.addEventListener('scroll', () => {
+    rvHeader.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  const rvHamburger = document.getElementById('rv-hamburger');
+  const rvMobileMenu = document.getElementById('rv-mobile-menu');
+  rvHamburger.addEventListener('click', () => {
+    rvHamburger.classList.toggle('open');
+    rvMobileMenu.classList.toggle('open');
+  });
+  rvMobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+    rvHamburger.classList.remove('open');
+    rvMobileMenu.classList.remove('open');
+  }));
+</script>

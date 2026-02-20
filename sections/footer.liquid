@@ -1,111 +1,200 @@
 <style>
-  .footer {
-    padding: 80px 20px 40px;
-    background: #1a1614;
-    text-align: center;
-    width: 100%;
-    margin: 0 !important;
-    left: 0;
-    right: 0;
+  .rv-footer {
+    background: #1E1610;
+    padding: 80px 40px 40px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .footer-logo {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 40px;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+  .rv-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4A853 30%, #7A9E8E 70%, transparent);
   }
 
-  .footer-logo:hover {
-    opacity: 1;
+  .rv-footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(247,242,234,0.08);
   }
 
-  .footer-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .rv-footer-logo-wrap {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 25px;
+    opacity: 0.85;
+    transition: opacity 0.3s;
   }
 
-  .footer-text {
-    font-size: 0.95rem;
+  .rv-footer-logo-wrap:hover { opacity: 1; }
+  .rv-footer-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+
+  .rv-footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
     font-weight: 300;
-    color: #999;
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.9;
+    color: rgba(247,242,234,0.55);
+    line-height: 1.8;
+    max-width: 240px;
+    margin-bottom: 28px;
   }
 
-  .social-links {
+  .rv-footer-social {
     display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 50px;
+    gap: 14px;
   }
 
-  .social-link {
-    width: 45px;
-    height: 45px;
-    border: 1px solid #333;
+  .rv-footer-social a {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(247,242,234,0.15);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #999;
+    color: rgba(247,242,234,0.45);
     text-decoration: none;
-    font-size: 1.1rem;
     transition: all 0.3s ease;
   }
 
-  .social-link:hover {
-    border-color: #C9A56A;
-    color: #C9A56A;
-    transform: translateY(-3px);
+  .rv-footer-social a:hover {
+    border-color: #D4A853;
+    color: #D4A853;
+    transform: translateY(-2px);
   }
 
-  .footer-copyright {
-    font-size: 0.8rem;
-    color: #666;
+  .rv-footer-col-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #D4A853;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .rv-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .rv-footer-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.45);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .rv-footer-links a:hover { color: #F7F2EA; }
+
+  .rv-footer-bottom {
+    max-width: 1200px;
+    margin: 28px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .rv-footer-copy {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.25);
     letter-spacing: 1px;
-    padding-top: 30px;
-    border-top: 1px solid #252525;
+  }
+
+  .rv-footer-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .rv-footer-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 400;
+    color: rgba(247,242,234,0.22);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid rgba(247,242,234,0.08);
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .rv-footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .rv-footer-bottom { flex-direction: column; text-align: center; }
   }
 </style>
 
-<footer class="footer">
-  <div class="container">
-    {% if section.settings.footer_logo != blank %}
-      <div class="footer-logo">
-        <img src="{{ section.settings.footer_logo | img_url: '300x300' }}" alt="{{ shop.name }}">
+<footer class="rv-footer">
+  <div class="rv-footer-grid">
+    <div>
+      {% if section.settings.footer_logo != blank %}
+        <div class="rv-footer-logo-wrap">
+          <img src="{{ section.settings.footer_logo | img_url: '200x200' }}" alt="{{ shop.name }}">
+        </div>
+      {% endif %}
+      <p class="rv-footer-tagline">Ancient wisdom.<br>Modern ritual.<br>Zero compromise.</p>
+      <div class="rv-footer-social">
+        {% if section.settings.email != blank %}
+          <a href="mailto:{{ section.settings.email }}" aria-label="Email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.instagram != blank %}
+          <a href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        {% endif %}
       </div>
-    {% endif %}
-    
-    <p class="footer-text">
-      {{ section.settings.footer_text }}
-    </p>
-    
-    <div class="social-links">
-      {% if section.settings.email != blank %}
-        <a href="mailto:{{ section.settings.email }}" class="social-link" aria-label="Email">✉</a>
-      {% endif %}
-      {% if section.settings.instagram != blank %}
-        <a href="{{ section.settings.instagram }}" class="social-link" aria-label="Instagram" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-      {% endif %}
-      {% if section.settings.facebook != blank %}
-        <a href="{{ section.settings.facebook }}" class="social-link" aria-label="Facebook" target="_blank">f</a>
-      {% endif %}
-      {% if section.settings.twitter != blank %}
-        <a href="{{ section.settings.twitter }}" class="social-link" aria-label="Twitter" target="_blank">𝕏</a>
-      {% endif %}
     </div>
-    
-    <p class="footer-copyright">© {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.</p>
+
+    <div>
+      <p class="rv-footer-col-title">Navigate</p>
+      <ul class="rv-footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/collections/all">Shop</a></li>
+        <li><a href="/pages/our-commitment">Our Commitment</a></li>
+        <li><a href="/pages/our-story">Our Story</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="rv-footer-col-title">Support</p>
+      <ul class="rv-footer-links">
+        {% if section.settings.email != blank %}
+          <li><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
+        {% endif %}
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rv-footer-bottom">
+    <p class="rv-footer-copy">© {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.</p>
+    <div class="rv-footer-badges">
+      <span class="rv-footer-badge">100% Organic</span>
+      <span class="rv-footer-badge">Plastic-Free</span>
+      <span class="rv-footer-badge">Cold-Pressed</span>
+    </div>
   </div>
 </footer>
 
@@ -113,42 +202,10 @@
 {
   "name": "Footer",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "footer_logo",
-      "label": "Footer Logo"
-    },
-    {
-      "type": "textarea",
-      "id": "footer_text",
-      "label": "Footer Text",
-      "default": "Rooted in ancient wisdom, cultivating modern wellness. Honor your body's natural intelligence through the timeless science of Ayurveda."
-    },
-    {
-      "type": "text",
-      "id": "email",
-      "label": "Email Address"
-    },
-    {
-      "type": "url",
-      "id": "instagram",
-      "label": "Instagram URL"
-    },
-    {
-      "type": "url",
-      "id": "facebook",
-      "label": "Facebook URL"
-    },
-    {
-      "type": "url",
-      "id": "twitter",
-      "label": "Twitter URL"
-    }
+    { "type": "image_picker", "id": "footer_logo", "label": "Footer Logo" },
+    { "type": "text", "id": "email", "label": "Email Address" },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" }
   ],
-  "presets": [
-    {
-      "name": "Footer"
-    }
-  ]
+  "presets": [{ "name": "Footer" }]
 }
 {% endschema %}
