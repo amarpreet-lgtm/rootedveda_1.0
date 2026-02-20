@@ -1,350 +1,341 @@
 <style>
+  /* ── HERO: centered, white, pastel ── */
   .rv-hero {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(160deg, #1E1610 0%, #2A1A0E 50%, #1E1610 100%);
+    background: #ffffff;
+    min-height: 94vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    padding: 100px 40px 80px;
-  }
-
-  .rv-hero-orb1 {
-    position: absolute;
-    width: 550px; height: 550px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,129,58,0.13) 0%, transparent 70%);
-    top: -100px; right: -80px;
-    pointer-events: none;
-  }
-
-  .rv-hero-orb2 {
-    position: absolute;
-    width: 380px; height: 380px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(122,158,142,0.09) 0%, transparent 70%);
-    bottom: -20px; left: -60px;
-    pointer-events: none;
-  }
-
-  .rv-hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    opacity: 0.25;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* ── MIDDLE SECTION: 3-col grid for bottle + side stats ── */
-  .rv-hero-middle {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 220px auto 220px;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 20px;
-  }
-
-  /* Left stats */
-  .rv-hero-stats-left {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-right: 30px;
-    text-align: right;
-  }
-
-  /* Right stats */
-  .rv-hero-stats-right {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-left: 30px;
-    text-align: left;
-  }
-
-  .rv-stat {
-    opacity: 0;
-    animation: fadeSlide 0.7s ease-out forwards;
-  }
-
-  .rv-stat:nth-child(1) { animation-delay: 0.5s; }
-  .rv-stat:nth-child(2) { animation-delay: 0.7s; }
-  .rv-stat:nth-child(3) { animation-delay: 0.9s; }
-
-  .rv-stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: #D4A853;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .rv-stat-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 300;
-    color: rgba(247,242,234,0.38);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-  }
-
-  /* Center bottle */
-  .rv-hero-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .rv-hero-bottle {
-    width: 240px;
-    height: auto;
-    animation: heroFloat 7s ease-in-out infinite;
-    filter: drop-shadow(0 28px 70px rgba(0,0,0,0.6)) drop-shadow(0 0 90px rgba(200,129,58,0.22));
-  }
-
-  @keyframes heroFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-14px); }
-  }
-
-  /* ── BOTTOM: full-width headline + CTA ── */
-  .rv-hero-bottom {
-    position: relative;
-    z-index: 2;
     text-align: center;
-    width: 100%;
-    max-width: 900px;
-    animation: fadeUp 1s 0.2s ease-out forwards;
-    opacity: 0;
+    padding: 90px 40px 60px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .rv-hero-label {
+  /* Soft pastel blobs in background */
+  .rv-hero-blob1 {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,210,190,0.35) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .rv-hero-blob2 {
+    position: absolute;
+    width: 450px; height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(195,214,206,0.28) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    pointer-events: none;
+  }
+
+  .rv-hero-blob3 {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,188,160,0.2) 0%, transparent 70%);
+    top: 40%; left: 5%;
+    pointer-events: none;
+  }
+
+  .rv-hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  /* Eyebrow */
+  .rv-hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #C8813A;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 14px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease-out forwards;
   }
 
-  .rv-hero-label::before,
-  .rv-hero-label::after {
+  .rv-hero-eyebrow::before,
+  .rv-hero-eyebrow::after {
     content: '';
     display: block;
-    width: 28px; height: 1px;
-    background: #D4A853;
-    opacity: 0.45;
+    width: 32px; height: 1px;
+    background: rgba(200,129,58,0.35);
   }
 
-  .rv-hero-label span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 300;
-    color: #D4A853;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: 0.75;
+  /* Bottle */
+  .rv-hero-bottle-wrap {
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease-out forwards;
+  }
+
+
+
+  .rv-hero-bottle {
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+    animation: floatBottle 7s ease-in-out infinite;
+    filter: drop-shadow(0 20px 50px rgba(140,112,96,0.18));
+  }
+
+  @keyframes floatBottle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Headline */
+  .rv-hero-headline {
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease-out forwards;
   }
 
   .rv-hero-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    font-weight: 400;
-    color: #F7F2EA;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    color: #2C1F14;
     line-height: 1.0;
     letter-spacing: -1px;
-    margin-bottom: 10px;
-    text-shadow: 0 4px 40px rgba(0,0,0,0.25);
   }
 
   .rv-hero-h1 em {
     font-style: italic;
-    color: #D4A853;
+    color: #C8813A;
   }
 
+  /* Subtitle */
   .rv-hero-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
     font-weight: 300;
-    color: rgba(247,242,234,0.42);
-    letter-spacing: 3px;
+    color: #A08878;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease-out forwards;
   }
 
-  .rv-hero-ctas {
+  /* Stats */
+  .rv-hero-stats {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 0;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease-out forwards;
+    border: 1px solid rgba(180,150,120,0.2);
+    border-radius: 60px;
+    overflow: hidden;
   }
 
-  .rv-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 38px;
-    background: #D4A853;
-    color: #1E1610;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
+  .rv-stat-item {
+    padding: 12px 28px;
+    text-align: center;
+    border-right: 1px solid rgba(180,150,120,0.2);
+  }
+
+  .rv-stat-item:last-child { border-right: none; }
+
+  .rv-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #2C1F14;
+    line-height: 1;
+    display: block;
+  }
+
+  .rv-stat-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.54rem;
+    font-weight: 300;
+    color: #A08878;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* CTAs */
+  .rv-hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s ease-out forwards;
+  }
+
+  .rv-btn-primary {
+    display: inline-block;
+    padding: 14px 38px;
+    background: #2C1F14;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
     letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+
+  .rv-btn-primary:hover { background: #4DBFA0; color: #ffffff; }
+
+  .rv-btn-outline {
+    display: inline-block;
+    padding: 13px 32px;
+    background: transparent;
+    color: #2C1F14;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid rgba(44,31,20,0.25);
     transition: all 0.3s ease;
   }
 
-  .rv-cta-primary:hover {
-    background: #F7F2EA;
-    letter-spacing: 4px;
+  .rv-btn-outline:hover {
+    border-color: #C8813A;
+    color: #C8813A;
   }
 
-  .rv-cta-ghost {
-    color: rgba(247,242,234,0.42);
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem;
+  /* Trust badges */
+  .rv-hero-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(180,150,120,0.15);
+    width: 100%;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease-out forwards;
+    flex-wrap: wrap;
+  }
+
+  .rv-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rv-trust-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  .rv-trust-dot.green  { background: #B5CEBD; }
+  .rv-trust-dot.peach  { background: #E8C4A8; }
+  .rv-trust-dot.rose   { background: #DEBDBD; }
+  .rv-trust-dot.sage2  { background: #C8813A; }
+
+  .rv-trust-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
     font-weight: 300;
+    color: #A08878;
     letter-spacing: 2px;
     text-transform: uppercase;
-    border-bottom: 1px solid rgba(247,242,234,0.18);
-    padding-bottom: 2px;
-    transition: all 0.3s;
-  }
-
-  .rv-cta-ghost:hover {
-    color: #F7F2EA;
-    border-color: rgba(247,242,234,0.45);
-  }
-
-  /* Scroll hint */
-  .rv-scroll-hint {
-    position: absolute;
-    bottom: 26px; left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    z-index: 3;
-    animation: scrollPulse 2.2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.28; transform: translateX(-50%) translateY(0); }
-    50% { opacity: 0.55; transform: translateX(-50%) translateY(5px); }
-  }
-
-  .rv-scroll-hint span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.5rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #F7F2EA;
-  }
-
-  .rv-scroll-line {
-    width: 1px; height: 28px;
-    background: linear-gradient(to bottom, #D4A853, transparent);
-  }
-
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Mobile: stack everything */
-  @media (max-width: 800px) {
-    .rv-hero { padding: 100px 20px 80px; }
-
-    .rv-hero-middle {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      justify-items: center;
-      margin-bottom: 12px;
-    }
-
-    .rv-hero-stats-left {
-      display: none;
-    }
-
-    .rv-hero-stats-right {
-      display: none;
-    }
-
-    .rv-hero-bottle { width: 180px; }
-
-    .rv-hero-ctas { flex-direction: column; gap: 14px; }
+  @media (max-width: 600px) {
+    .rv-hero { padding: 80px 20px 50px; }
+    .rv-hero-bottle { width: 150px; }
+    .rv-hero-ctas { flex-direction: column; gap: 12px; }
+    .rv-hero-stats { flex-wrap: wrap; border-radius: 12px; }
+    .rv-stat-item { border-right: none; border-bottom: 1px solid rgba(180,150,120,0.2); }
+    .rv-stat-item:last-child { border-bottom: none; }
   }
 </style>
 
 <section class="rv-hero">
-  <div class="rv-hero-orb1"></div>
-  <div class="rv-hero-orb2"></div>
+  <div class="rv-hero-blob1"></div>
+  <div class="rv-hero-blob2"></div>
+  <div class="rv-hero-blob3"></div>
 
-  <!-- 3-column: stats | bottle | stats -->
-  <div class="rv-hero-middle">
-    <div class="rv-hero-stats-left">
-      <div class="rv-stat">
-        <div class="rv-stat-num">4</div>
-        <div class="rv-stat-label">Core Ingredients</div>
-      </div>
-      <div class="rv-stat">
-        <div class="rv-stat-num">100%</div>
-        <div class="rv-stat-label">Organic &amp; Cold-Pressed</div>
-      </div>
-    </div>
+  <div class="rv-hero-inner">
 
-    <div class="rv-hero-center">
+    <div class="rv-hero-eyebrow">Ayurvedic Skincare</div>
+
+    <div class="rv-hero-bottle-wrap">
       {% if section.settings.logo != blank %}
         <img class="rv-hero-bottle" src="{{ section.settings.logo | img_url: '500x500' }}" alt="{{ shop.name }}">
       {% else %}
-        <img class="rv-hero-bottle" src="https://via.placeholder.com/240x320/1E1610/D4A853?text=Bottle" alt="{{ shop.name }}">
+        <img class="rv-hero-bottle" src="{{ 'fulllogo_transparent_nobuffer.png' | asset_url }}" alt="{{ shop.name }}">
       {% endif %}
     </div>
 
-    <div class="rv-hero-stats-right">
-      <div class="rv-stat">
-        <div class="rv-stat-num">1 oz</div>
-        <div class="rv-stat-label">Single-Step Ritual</div>
-      </div>
-      <div class="rv-stat">
-        <div class="rv-stat-num">0</div>
-        <div class="rv-stat-label">Synthetic Fillers</div>
-      </div>
+    <div class="rv-hero-headline">
+      <h1 class="rv-hero-h1">Nature's <em>Botox.</em></h1>
     </div>
-  </div>
 
-  <!-- Full-width headline below the image — never overlaps -->
-  <div class="rv-hero-bottom">
-    <div class="rv-hero-label">
-      <span>Rooted Veda · Ayurvedic Skincare</span>
-    </div>
-    <h1 class="rv-hero-h1">Nature's <em>Botox.</em></h1>
     <p class="rv-hero-sub">{{ section.settings.subtitle }}</p>
-    <div class="rv-hero-ctas">
-      <a href="{{ section.settings.button_link }}" class="rv-cta-primary">{{ section.settings.button_text }}</a>
-      <a href="/pages/our-story" class="rv-cta-ghost">Our Story</a>
-    </div>
-  </div>
 
-  <div class="rv-scroll-hint">
-    <span>Scroll</span>
-    <div class="rv-scroll-line"></div>
+    <div class="rv-hero-stats">
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">4</span>
+        <span class="rv-stat-label">Ingredients</span>
+      </div>
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">100%</span>
+        <span class="rv-stat-label">Organic</span>
+      </div>
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">1 oz</span>
+        <span class="rv-stat-label">Single Step</span>
+      </div>
+    </div>
+
+    <div class="rv-hero-ctas">
+      <a href="{{ section.settings.button_link }}" class="rv-btn-primary">{{ section.settings.button_text }}</a>
+      <a href="/pages/our-commitment" class="rv-btn-outline">Our Commitment</a>
+    </div>
+
+    <div class="rv-hero-trust">
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot green"></div>
+        <span class="rv-trust-label">100% Organic</span>
+      </div>
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot peach"></div>
+        <span class="rv-trust-label">Plastic Free</span>
+      </div>
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot rose"></div>
+        <span class="rv-trust-label">Hormone Safe</span>
+      </div>
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot sage2"></div>
+        <span class="rv-trust-label">5000yr Ayurvedic</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -352,7 +343,7 @@
 {
   "name": "Hero Section",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Product / Logo Image" },
+    { "type": "image_picker", "id": "logo", "label": "Product Image" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Potent by Nature · Minimal by Design" },
     { "type": "text", "id": "button_text", "label": "Button Text", "default": "Shop Now" },
     { "type": "url", "id": "button_link", "label": "Button Link", "default": "/collections/all" }

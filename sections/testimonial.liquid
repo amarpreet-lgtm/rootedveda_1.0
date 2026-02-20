@@ -1,114 +1,60 @@
 <style>
   .rv-testimonial {
-    padding: 120px 40px;
-    background: var(--cream, #F7F2EA);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Decorative side bar */
-  .rv-testimonial::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, transparent, var(--brass, #D4A853), transparent);
+    background: #FAF7F3;
+    padding: 100px 40px;
+    border-top: 1px solid rgba(180,150,120,0.15);
+    border-bottom: 1px solid rgba(180,150,120,0.15);
   }
 
   .rv-testimonial-inner {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 50px;
-    align-items: start;
+    text-align: center;
   }
 
-  .rv-testimonial-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 8rem;
-    line-height: 0.7;
-    color: var(--brass, #D4A853);
-    opacity: 0.3;
-    user-select: none;
-    padding-top: 10px;
-  }
-
-  .rv-testimonial-content {}
-
-  .rv-testimonial-text {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--walnut, #1E1610);
-    line-height: 1.75;
-    margin-bottom: 35px;
-  }
-
-  .rv-testimonial-byline {
+  .rv-testimonial-stars {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 32px;
+    color: #C8813A;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
   }
 
-  .rv-testimonial-byline::before {
-    content: '';
-    display: block;
-    width: 24px;
+  .rv-testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #2C1F14;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .rv-testimonial-rule {
+    width: 40px;
     height: 1px;
-    background: var(--brass, #D4A853);
+    background: #C8813A;
+    margin: 0 auto 20px;
   }
 
   .rv-testimonial-author {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
     font-weight: 400;
-    color: var(--teal, #7A9E8E);
+    color: #8C7060;
     letter-spacing: 3px;
     text-transform: uppercase;
-  }
-
-  /* Star rating */
-  .rv-testimonial-stars {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 20px;
-  }
-
-  .rv-testimonial-star {
-    color: var(--brass, #D4A853);
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 600px) {
-    .rv-testimonial-inner {
-      grid-template-columns: 1fr;
-    }
-    .rv-testimonial-mark {
-      display: none;
-    }
   }
 </style>
 
 <section class="rv-testimonial">
   <div class="rv-testimonial-inner">
-    <div class="rv-testimonial-mark">"</div>
-    <div class="rv-testimonial-content">
-      <div class="rv-testimonial-stars">
-        <span class="rv-testimonial-star">★</span>
-        <span class="rv-testimonial-star">★</span>
-        <span class="rv-testimonial-star">★</span>
-        <span class="rv-testimonial-star">★</span>
-        <span class="rv-testimonial-star">★</span>
-      </div>
-      <p class="rv-testimonial-text">{{ section.settings.testimonial_text }}</p>
-      <div class="rv-testimonial-byline">
-        <span class="rv-testimonial-author">{{ section.settings.author_name }}{% if section.settings.author_title != blank %} · {{ section.settings.author_title }}{% endif %}</span>
-      </div>
-    </div>
+    <div class="rv-testimonial-stars">★★★★★</div>
+    <p class="rv-testimonial-quote">"{{ section.settings.testimonial_text }}"</p>
+    <div class="rv-testimonial-rule"></div>
+    <p class="rv-testimonial-author">{{ section.settings.author_name }}{% if section.settings.author_title != blank %} &nbsp;·&nbsp; {{ section.settings.author_title }}{% endif %}</p>
   </div>
 </section>
 
@@ -116,24 +62,9 @@
 {
   "name": "Testimonial",
   "settings": [
-    {
-      "type": "textarea",
-      "id": "testimonial_text",
-      "label": "Testimonial Text",
-      "default": "Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!"
-    },
-    {
-      "type": "text",
-      "id": "author_name",
-      "label": "Author Name",
-      "default": "Sarah Mansoor"
-    },
-    {
-      "type": "text",
-      "id": "author_title",
-      "label": "Author Title",
-      "default": "Nurse Practitioner"
-    }
+    { "type": "textarea", "id": "testimonial_text", "label": "Testimonial", "default": "Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!" },
+    { "type": "text", "id": "author_name", "label": "Author Name", "default": "Sarah Mansoor" },
+    { "type": "text", "id": "author_title", "label": "Author Title", "default": "Nurse Practitioner" }
   ],
   "presets": [{ "name": "Testimonial" }]
 }
