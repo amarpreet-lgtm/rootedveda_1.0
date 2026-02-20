@@ -4,18 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#1a1614">
-    
+    <meta name="theme-color" content="#1E1610">
     <link rel="canonical" href="{{ canonical_url }}">
-    
+
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
     {%- endif -%}
-
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {%- endunless -%}
 
     <title>
       {{ page_title }}
@@ -30,107 +24,72 @@
 
     {% render 'meta-tags' %}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    
     {{ content_for_header }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap');
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --cream: #F7F2EA;
+        --walnut: #1E1610;
+        --gold: #D4A853;
+        --amber: #C8813A;
+        --sage: #7A9E8E;
+        --ink: #0D0A07;
       }
 
-      html {
-        scroll-behavior: smooth;
-        width: 100%;
-        height: 100%;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; width: 100%; }
 
       body {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'DM Sans', sans-serif;
         line-height: 1.8;
-        color: #2c2c2c;
-        background: #1a1614 !important;
+        color: #1E1610;
+        background: #F7F2EA;
         overflow-x: hidden;
-        width: 100vw !important;
-        min-height: 100vh !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        position: relative;
       }
 
-      /* Cart Button */
-      .cart-button {
-        position: fixed;
-        top: 35px;
-        right: 35px;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        background: transparent;
-        color: #C9A56A;
+      img { max-width: 100%; height: auto; display: block; }
+
+      ::selection { background: #D4A853; color: #1E1610; }
+
+      *:focus-visible { outline: 2px solid #D4A853; outline-offset: 2px; }
+
+      .visually-hidden {
+        position: absolute !important;
+        overflow: hidden;
+        width: 1px; height: 1px;
+        margin: -1px; padding: 0; border: 0;
+        clip: rect(0 0 0 0);
+      }
+
+      .skip-to-content-link:focus {
+        clip: auto; width: auto; height: auto;
+        margin: 0; color: #D4A853; background: #1E1610;
+        padding: 12px; z-index: 10000;
+        position: absolute; top: 0; left: 0;
         text-decoration: none;
-        border: none;
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      .cart-button:hover {
-        transform: scale(1.1);
-        opacity: 0.8;
-      }
-
-      .cart-icon {
-        font-size: 1.5rem;
-      }
-
-      @media (max-width: 768px) {
-        .cart-button {
-          top: 25px;
-          right: 25px;
-          width: 45px;
-          height: 45px;
-          font-size: 1.3rem;
-        }
-
-        .cart-icon {
-          font-size: 1.3rem;
-        }
       }
     </style>
-
-    {{ 'base.css' | asset_url | stylesheet_tag }}
-    
-    {%- unless settings.type_body_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
 
   <body class="template-{{ template.name }}">
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-      {{ "accessibility.skip_to_text" | t }}
-    </a>
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">Skip to content</a>
 
-    <!-- Cart Button -->
-    <a href="{{ routes.cart_url }}" class="cart-button" id="cart-icon-bubble">
-      <span class="cart-icon">🛒</span>
-    </a>
+    {% render 'header-nav' %}
 
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
+
+    {% section 'footer' %}
 
     {% render 'cart-drawer' %}
 
@@ -138,20 +97,8 @@
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
         cart_change_url: '{{ routes.cart_change_url }}',
-        cart_update_url: '{{ routes.cart_update_url }}',
-        predictive_search_url: '{{ routes.predictive_search_url }}'
+        cart_update_url: '{{ routes.cart_update_url }}'
       };
-
-      window.cartStrings = {
-        error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.quantity_error' | t: quantity: '[quantity]' }}`
-      }
-
-      window.variantStrings = {
-        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-        soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`,
-      }
     </script>
   </body>
 </html>

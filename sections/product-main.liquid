@@ -1,7 +1,7 @@
 <style>
   .product-main {
     padding: 100px 20px;
-    background: #fafafa;
+    background: #F7F2EA;
     min-height: 80vh;
   }
 
@@ -25,7 +25,7 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    background: white;
+    background: #FEFCF8;
     padding: 20px;
   }
 
@@ -34,28 +34,28 @@
   }
 
   .product-vendor {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 500;
-    color: #C9A56A;
+    color: #D4A853;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 15px;
   }
 
   .product-title-main {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 400;
-    color: #2c2c2c;
+    color: #1E1610;
     margin-bottom: 20px;
     line-height: 1.3;
   }
 
   .product-price-main {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 2rem;
-    color: #C9A56A;
+    color: #D4A853;
     font-weight: 500;
     margin-bottom: 30px;
   }
@@ -77,10 +77,10 @@
   }
 
   .variant-label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    color: #2c2c2c;
+    color: #1E1610;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 10px;
@@ -90,19 +90,19 @@
   .variant-select {
     width: 100%;
     padding: 15px 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
     border: 2px solid #ddd;
     border-radius: 5px;
-    background: white;
-    color: #2c2c2c;
+    background: #FEFCF8;
+    color: #1E1610;
     cursor: pointer;
     transition: border-color 0.3s ease;
   }
 
   .variant-select:hover,
   .variant-select:focus {
-    border-color: #C9A56A;
+    border-color: #D4A853;
     outline: none;
   }
 
@@ -113,7 +113,7 @@
   .quantity-input {
     width: 100px;
     padding: 15px 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -124,10 +124,10 @@
     width: 100%;
     padding: 18px 50px;
     background: transparent;
-    color: #C9A56A;
+    color: #D4A853;
     text-decoration: none;
-    border: 2px solid #C9A56A;
-    font-family: 'Montserrat', sans-serif;
+    border: 2px solid #D4A853;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -145,7 +145,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #C9A56A;
+    background: #D4A853;
     transition: left 0.4s ease;
     z-index: -1;
   }
@@ -155,7 +155,7 @@
   }
 
   .add-to-cart-button:hover {
-    color: #1a1614;
+    color: #1E1610;
   }
 
   .add-to-cart-button:disabled {
@@ -186,7 +186,7 @@
       {% if product.featured_image %}
         <img src="{{ product.featured_image | img_url: '800x800' }}" alt="{{ product.title }}" class="product-image-main">
       {% else %}
-        <img src="https://via.placeholder.com/800x800/fafafa/C9A56A?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="product-image-main">
+        <img src="https://via.placeholder.com/800x800/F5EFE7/C9A46B?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="product-image-main">
       {% endif %}
     </div>
 
@@ -229,7 +229,7 @@
           <label for="quantity" class="variant-label">Quantity</label>
           <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
             <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
-            <span style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #888; font-weight: 400;">Standard size 1 fl. oz. (30mL)</span>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: #888; font-weight: 400;">Standard size 1 fl. oz. (30mL)</span>
           </div>
         </div>
 

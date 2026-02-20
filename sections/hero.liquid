@@ -1,163 +1,350 @@
 <style>
-  .hero {
+  .rv-hero {
     position: relative;
     min-height: 100vh;
     width: 100%;
-    margin: 0 !important;
-    padding: 80px 20px;
+    background: linear-gradient(160deg, #1E1610 0%, #2A1A0E 50%, #1E1610 100%);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #1a1614 0%, #2d2520 100%);
     overflow: hidden;
-    left: 0;
-    right: 0;
+    padding: 100px 40px 80px;
   }
 
-  .hero::before {
-    content: '';
+  .rv-hero-orb1 {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 50%, rgba(201, 165, 106, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(74, 107, 86, 0.06) 0%, transparent 50%);
+    width: 550px; height: 550px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,129,58,0.13) 0%, transparent 70%);
+    top: -100px; right: -80px;
     pointer-events: none;
   }
 
-  .hero-content {
-    position: relative;
-    text-align: center;
-    max-width: 900px;
-    z-index: 2;
-    animation: fadeIn 1.8s ease-out;
+  .rv-hero-orb2 {
+    position: absolute;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,158,142,0.09) 0%, transparent 70%);
+    bottom: -20px; left: -60px;
+    pointer-events: none;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
+  .rv-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── MIDDLE SECTION: 3-col grid for bottle + side stats ── */
+  .rv-hero-middle {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 220px auto 220px;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 20px;
+  }
+
+  /* Left stats */
+  .rv-hero-stats-left {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-right: 30px;
+    text-align: right;
+  }
+
+  /* Right stats */
+  .rv-hero-stats-right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-left: 30px;
+    text-align: left;
+  }
+
+  .rv-stat {
+    opacity: 0;
+    animation: fadeSlide 0.7s ease-out forwards;
+  }
+
+  .rv-stat:nth-child(1) { animation-delay: 0.5s; }
+  .rv-stat:nth-child(2) { animation-delay: 0.7s; }
+  .rv-stat:nth-child(3) { animation-delay: 0.9s; }
+
+  .rv-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #D4A853;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .rv-stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.38);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  /* Center bottle */
+  .rv-hero-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rv-hero-bottle {
+    width: 240px;
+    height: auto;
+    animation: heroFloat 7s ease-in-out infinite;
+    filter: drop-shadow(0 28px 70px rgba(0,0,0,0.6)) drop-shadow(0 0 90px rgba(200,129,58,0.22));
+  }
+
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+
+  /* ── BOTTOM: full-width headline + CTA ── */
+  .rv-hero-bottom {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    animation: fadeUp 1s 0.2s ease-out forwards;
+    opacity: 0;
+  }
+
+  .rv-hero-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .rv-hero-label::before,
+  .rv-hero-label::after {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: #D4A853;
+    opacity: 0.45;
+  }
+
+  .rv-hero-label span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: #D4A853;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .rv-hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 400;
+    color: #F7F2EA;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.25);
+  }
+
+  .rv-hero-h1 em {
+    font-style: italic;
+    color: #D4A853;
+  }
+
+  .rv-hero-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.42);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .rv-hero-ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .rv-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 38px;
+    background: #D4A853;
+    color: #1E1610;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .rv-cta-primary:hover {
+    background: #F7F2EA;
+    letter-spacing: 4px;
+  }
+
+  .rv-cta-ghost {
+    color: rgba(247,242,234,0.42);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(247,242,234,0.18);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+
+  .rv-cta-ghost:hover {
+    color: #F7F2EA;
+    border-color: rgba(247,242,234,0.45);
+  }
+
+  /* Scroll hint */
+  .rv-scroll-hint {
+    position: absolute;
+    bottom: 26px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 3;
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.28; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.55; transform: translateX(-50%) translateY(5px); }
+  }
+
+  .rv-scroll-hint span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #F7F2EA;
+  }
+
+  .rv-scroll-line {
+    width: 1px; height: 28px;
+    background: linear-gradient(to bottom, #D4A853, transparent);
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .logo-container {
-    margin-bottom: 30px;
-    position: relative;
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .hero-logo {
-    width: 320px;
-    height: 320px;
-    margin: 0 auto;
-    position: relative;
-    animation: float 6s ease-in-out infinite;
-  }
+  /* Mobile: stack everything */
+  @media (max-width: 800px) {
+    .rv-hero { padding: 100px 20px 80px; }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .hero-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 10px 40px rgba(201, 165, 106, 0.3));
-  }
-
-  .divider {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #C9A56A, transparent);
-    margin: 30px auto;
-  }
-
-  .hero-subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: #d4d4d4;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-  }
-
-  .hero-description {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 300;
-    line-height: 2;
-    color: #b8b8b8;
-    max-width: 700px;
-    margin: 0 auto 60px;
-  }
-
-  .cta-button {
-    display: inline-block;
-    padding: 18px 50px;
-    background: transparent;
-    color: #C9A56A;
-    text-decoration: none;
-    border: 2px solid #C9A56A;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #C9A56A;
-    transition: left 0.4s ease;
-    z-index: -1;
-  }
-
-  .cta-button:hover::before {
-    left: 0;
-  }
-
-  .cta-button:hover {
-    color: #1a1614;
-    border-color: #C9A56A;
-  }
-
-  @media (max-width: 768px) {
-    .hero-logo {
-      width: 200px;
-      height: 200px;
+    .rv-hero-middle {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      justify-items: center;
+      margin-bottom: 12px;
     }
+
+    .rv-hero-stats-left {
+      display: none;
+    }
+
+    .rv-hero-stats-right {
+      display: none;
+    }
+
+    .rv-hero-bottle { width: 180px; }
+
+    .rv-hero-ctas { flex-direction: column; gap: 14px; }
   }
 </style>
 
-<section class="hero">
-  <div class="hero-content">
-    <div class="logo-container">
-      <div class="hero-logo">
-        {% if section.settings.logo != blank %}
-          <img src="{{ section.settings.logo | img_url: '600x600' }}" alt="{{ shop.name }}">
-        {% else %}
-          <img src="https://via.placeholder.com/320x320/1a1614/C9A56A?text=Logo" alt="{{ shop.name }}">
-        {% endif %}
+<section class="rv-hero">
+  <div class="rv-hero-orb1"></div>
+  <div class="rv-hero-orb2"></div>
+
+  <!-- 3-column: stats | bottle | stats -->
+  <div class="rv-hero-middle">
+    <div class="rv-hero-stats-left">
+      <div class="rv-stat">
+        <div class="rv-stat-num">4</div>
+        <div class="rv-stat-label">Core Ingredients</div>
+      </div>
+      <div class="rv-stat">
+        <div class="rv-stat-num">100%</div>
+        <div class="rv-stat-label">Organic &amp; Cold-Pressed</div>
       </div>
     </div>
-    
-    <div class="divider"></div>
-    <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
-    
-    <p class="hero-description">
-      {{ section.settings.description }}
-    </p>
-    
-    <a href="{{ section.settings.button_link }}" class="cta-button">{{ section.settings.button_text }}</a>
+
+    <div class="rv-hero-center">
+      {% if section.settings.logo != blank %}
+        <img class="rv-hero-bottle" src="{{ section.settings.logo | img_url: '500x500' }}" alt="{{ shop.name }}">
+      {% else %}
+        <img class="rv-hero-bottle" src="https://via.placeholder.com/240x320/1E1610/D4A853?text=Bottle" alt="{{ shop.name }}">
+      {% endif %}
+    </div>
+
+    <div class="rv-hero-stats-right">
+      <div class="rv-stat">
+        <div class="rv-stat-num">1 oz</div>
+        <div class="rv-stat-label">Single-Step Ritual</div>
+      </div>
+      <div class="rv-stat">
+        <div class="rv-stat-num">0</div>
+        <div class="rv-stat-label">Synthetic Fillers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-width headline below the image — never overlaps -->
+  <div class="rv-hero-bottom">
+    <div class="rv-hero-label">
+      <span>Rooted Veda · Ayurvedic Skincare</span>
+    </div>
+    <h1 class="rv-hero-h1">Nature's <em>Botox.</em></h1>
+    <p class="rv-hero-sub">{{ section.settings.subtitle }}</p>
+    <div class="rv-hero-ctas">
+      <a href="{{ section.settings.button_link }}" class="rv-cta-primary">{{ section.settings.button_text }}</a>
+      <a href="/pages/our-story" class="rv-cta-ghost">Our Story</a>
+    </div>
+  </div>
+
+  <div class="rv-scroll-hint">
+    <span>Scroll</span>
+    <div class="rv-scroll-line"></div>
   </div>
 </section>
 
@@ -165,40 +352,11 @@
 {
   "name": "Hero Section",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo Image"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Ancient Knowledge • Potent by Nature. Minimal by Design."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Ayurvedic beauty handcrafted for you. Experience the transformative power of nature's knowledge, cultivated over five millennia."
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
-      "default": "/collections/all"
-    }
+    { "type": "image_picker", "id": "logo", "label": "Product / Logo Image" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Potent by Nature · Minimal by Design" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "Shop Now" },
+    { "type": "url", "id": "button_link", "label": "Button Link", "default": "/collections/all" }
   ],
-  "presets": [
-    {
-      "name": "Hero"
-    }
-  ]
+  "presets": [{ "name": "Hero" }]
 }
 {% endschema %}
