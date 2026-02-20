@@ -1,1 +1,65 @@
-{"current":{"color_primary":"#C9A56A","color_secondary":"#1a1614","color_accent":"#2d2520","sections":{"footer":{"type":"footer","settings":{"footer_text":"Rooted in ancient wisdom, cultivating modern wellness. Honor your body's natural intelligence through the timeless science of Ayurveda.","email":"support@rootedveda.com","instagram":"https:\/\/www.instagram.com\/rootedveda\/","facebook":"","twitter":""}},"hero":{"type":"hero","settings":{"logo":"shopify:\/\/shop_images\/fulllogo_transparent_nobuffer.png","subtitle":"Potent by Nature • Minimal by Design • Simple Ritual","description":"Nature’s Botox: Potency without the excess. We’ve captured the transformative power of traditional Ayurveda in one intentional step. By stripping away fillers and artificial preservatives, we leave only 100% pure, cold-pressed organic oils that your skin can actually use. Handcrafted with a commitment to high-quality ingredients and a plastic free footprint, our formula is a clean sanctuary for your skin and a purposeful commitment to zero-waste.","button_text":"Shop Now","button_link":"shopify:\/\/collections\/all"}},"about":{"type":"about","settings":{"subtitle":"Our Philosophy","title":"Pure Results. Zero Noise.","description":"Our Philosophy We believe beauty shouldn’t be complicated or cluttered. By stripping away synthetic fillers and unnecessary additives, we leave only the potent, high-quality botanicals your skin thrives on. Nature provides everything we need, and we simply bottle the best of it—creating high-performance, single-step solutions that never compromise on purity.\nOur commitment to minimalism extends beyond our formulas to the planet itself. We design every product with an \"earth-first\" mindset, prioritizing sustainable sourcing and reduced plastic waste. It is intentional care that honors both your skin and the world we share: everything you need, and nothing you don’t."}},"products-featured":{"type":"products-featured","settings":{"subtitle":"Our Collection","title":"Nature's Botox","description":"","collection":"","products_to_show":2,"featured_image":"shopify:\/\/shop_images\/IMG_0013_1.jpg"}},"testimonial":{"type":"testimonial","settings":{"testimonial_text":"Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!","author_name":"Sarah Mansoor","author_title":"Nurse Practitioner"}},"collection-header":{"type":"collection-header","settings":{}},"collection-products":{"type":"collection-products","settings":{}}},"content_for_index":[]}}
+{
+  "current": {
+    "color_primary": "#C9A56A",
+    "color_secondary": "#1a1614",
+    "color_accent": "#2d2520",
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_text": "",
+          "email": "support@rootedveda.com",
+          "instagram": "https://www.instagram.com/rootedveda/",
+          "facebook": "",
+          "twitter": ""
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "logo": "shopify://shop_images/fulllogo_transparent_nobuffer.png",
+          "subtitle": "Potent by Nature \u2022 Minimal by Design",
+          "description": "At the heart of our craft is Nature's Botox, an one step Ayurvedic face oil designed for those who value potency over the noise of a ten-step routine. By stripping away synthetic fillers and artificial preservatives, we've left only 100% pure, cold-pressed organic oils\u2014nutrients your skin actually recognizes and absorbs. Handcrafted with a commitment to high-quality ingredients and a plastic free footprint, our formula is a clean sanctuary for your skin and a purposeful commitment to zero-waste.",
+          "button_text": "Shop Now",
+          "button_link": "shopify://collections/all"
+        }
+      },
+      "about": {
+        "type": "about",
+        "settings": {
+          "subtitle": "Our Philosophy",
+          "title": "Pure Results. Zero Noise.",
+          "description": "Our Philosophy We believe beauty shouldn\u2019t be complicated or cluttered. By stripping away synthetic fillers and unnecessary additives, we leave only the potent, high-quality botanicals your skin thrives on. Nature provides everything we need, and we simply bottle the best of it\u2014creating high-performance, single-step solutions that never compromise on purity.\nOur commitment to minimalism extends beyond our formulas to the planet itself. We design every product with an \"earth-first\" mindset, prioritizing sustainable sourcing and reduced plastic waste. It is intentional care that honors both your skin and the world we share: everything you need, and nothing you don\u2019t."
+        }
+      },
+      "products-featured": {
+        "type": "products-featured",
+        "settings": {
+          "subtitle": "Our Collection",
+          "title": "Nature's Botox",
+          "description": "",
+          "collection": "",
+          "products_to_show": 2,
+          "featured_image": "shopify://shop_images/IMG_0013_1.jpg"
+        }
+      },
+      "testimonial": {
+        "type": "testimonial",
+        "settings": {
+          "testimonial_text": "Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!",
+          "author_name": "Sarah Mansoor",
+          "author_title": "Nurse Practitioner"
+        }
+      },
+      "collection-header": {
+        "type": "collection-header",
+        "settings": {}
+      },
+      "collection-products": {
+        "type": "collection-products",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  }
+}
