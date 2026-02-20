@@ -1,118 +1,122 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+  .rv-announce {
+    background: #F2EBE1;
+    color: #8C7060;
+    text-align: center;
+    padding: 9px 20px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(180,150,120,0.15);
+  }
 
   .rv-header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 999;
-    padding: 0 50px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(180,150,120,0.18);
+    transition: box-shadow 0.3s;
   }
 
   .rv-header.scrolled {
-    background: rgba(30, 22, 16, 0.94);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(212,168,83,0.12);
+    box-shadow: 0 2px 24px rgba(140,112,96,0.08);
   }
 
-  .rv-header-logo {
-    text-decoration: none;
-    display: flex;
+  .rv-header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+    height: 68px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
   }
 
-  .rv-header-logo img {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(212,168,83,0.2));
-  }
-
-  .rv-header-logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: #F7F2EA;
-    letter-spacing: 1px;
-  }
-
-  .rv-nav {
+  .rv-nav-left {
     display: flex;
     align-items: center;
-    gap: 38px;
+    gap: 34px;
     list-style: none;
     margin: 0; padding: 0;
   }
 
-  .rv-nav a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 300;
-    color: rgba(247,242,234,0.6);
+  .rv-header-logo {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    color: #1A0F08 !important;
+  }
+
+  .rv-header-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1A0F08 !important;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    display: block;
+    -webkit-text-stroke: 0.3px #1A0F08;
+  }
+
+  .rv-nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+
+  .rv-nav-left a,
+  .rv-nav-right a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: #5C4535;
     text-decoration: none;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    transition: color 0.25s;
+    transition: color 0.2s;
     position: relative;
     padding-bottom: 3px;
   }
 
-  .rv-nav a::after {
+  .rv-nav-left a::after,
+  .rv-nav-right a::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0;
     width: 0; height: 1px;
-    background: #D4A853;
+    background: #C8813A;
     transition: width 0.3s ease;
   }
 
-  .rv-nav a:hover, .rv-nav a.active { color: #F7F2EA; }
-  .rv-nav a:hover::after, .rv-nav a.active::after { width: 100%; }
+  .rv-nav-left a:hover,
+  .rv-nav-right a:hover { color: #1A0F08; }
 
-  .rv-header-right {
+  .rv-nav-left a:hover::after,
+  .rv-nav-right a:hover::after { width: 100%; }
+
+  .rv-cart-link {
     display: flex;
     align-items: center;
-    gap: 22px;
-  }
-
-  .rv-header-cart {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: rgba(247,242,234,0.6);
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.25s;
-  }
-
-  .rv-header-cart:hover { color: #D4A853; }
-
-  .rv-header-shop {
-    padding: 8px 20px;
-    border: 1px solid rgba(212,168,83,0.5);
-    color: #D4A853;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.66rem;
+    gap: 6px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
     font-weight: 400;
+    color: #5C4535;
+    text-decoration: none;
     letter-spacing: 2px;
     text-transform: uppercase;
-    border-radius: 30px;
-    transition: all 0.3s ease;
+    transition: color 0.2s;
   }
 
-  .rv-header-shop:hover {
-    background: #D4A853;
-    color: #1E1610;
-  }
+  .rv-cart-link:hover { color: #2C1F14; }
 
   .rv-hamburger {
     display: none;
@@ -126,10 +130,9 @@
 
   .rv-hamburger span {
     display: block;
-    width: 22px;
-    height: 1px;
-    background: rgba(247,242,234,0.7);
-    transition: all 0.3s ease;
+    width: 22px; height: 1px;
+    background: #2C1F14;
+    transition: all 0.3s;
   }
 
   .rv-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -138,64 +141,62 @@
 
   .rv-mobile-menu {
     display: none;
-    position: fixed;
-    top: 70px; left: 0; right: 0;
-    background: rgba(30,22,16,0.97);
-    backdrop-filter: blur(20px);
-    padding: 36px 50px;
+    background: #ffffff;
+    border-top: 1px solid rgba(180,150,120,0.15);
+    padding: 28px 40px 36px;
     flex-direction: column;
-    gap: 0;
-    z-index: 998;
-    border-top: 1px solid rgba(212,168,83,0.1);
   }
 
   .rv-mobile-menu.open { display: flex; }
 
   .rv-mobile-menu a {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
     font-style: italic;
-    color: rgba(247,242,234,0.65);
+    color: #2C1F14;
     text-decoration: none;
-    transition: color 0.25s;
-    border-bottom: 1px solid rgba(247,242,234,0.07);
-    padding: 18px 0;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(180,150,120,0.12);
+    transition: color 0.2s;
   }
 
-  .rv-mobile-menu a:hover { color: #D4A853; }
+  .rv-mobile-menu a:hover { color: #C8813A; }
 
   @media (max-width: 860px) {
-    .rv-header { padding: 0 24px; }
-    .rv-nav, .rv-header-shop { display: none; }
+    .rv-nav-left, .rv-nav-right { display: none; }
+    .rv-header-inner { grid-template-columns: auto 1fr auto; padding: 0 20px; }
+    .rv-header-logo { text-align: left; }
     .rv-hamburger { display: flex; }
   }
 </style>
 
+<div class="rv-announce">
+  Free shipping on orders over $45 &nbsp;·&nbsp; Organic &nbsp;·&nbsp; Plastic-Free &nbsp;·&nbsp; Hormone-Safe
+</div>
+
 <header class="rv-header" id="rv-header">
-  <a href="{{ routes.root_url }}" class="rv-header-logo">
-    {% comment %}no logo in snippet{% endcomment %}{% if false %}
-      
-    {% else %}
-      <span class="rv-header-logo-text">{{ shop.name }}</span>
-    {% endif %}
-  </a>
-
-  <nav>
-    <ul class="rv-nav">
-      <li><a href="{{ routes.root_url }}" {% if template.name == 'index' %}class="active"{% endif %}>Home</a></li>
-      <li><a href="/collections/all" {% if template.name == 'collection' %}class="active"{% endif %}>Shop</a></li>
+  <div class="rv-header-inner">
+    <ul class="rv-nav-left">
+      <li><a href="/">Home</a></li>
+      <li><a href="/collections/all">Shop</a></li>
       <li><a href="/pages/our-commitment">Our Commitment</a></li>
-      <li><a href="/pages/our-story">Our Story</a></li>
     </ul>
-  </nav>
 
-  <div class="rv-header-right">
-    <a href="{{ routes.cart_url }}" class="rv-header-cart">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Cart
+    <a href="{{ routes.root_url }}" class="rv-header-logo">
+      <span class="rv-header-logo-text">{{ shop.name }}</span>
     </a>
-    <a href="/collections/all" class="rv-header-shop">Shop Now</a>
+
+    <ul class="rv-nav-right">
+      <li><a href="/collections/all">Best Sellers</a></li>
+      <li>
+        <a href="{{ routes.cart_url }}" class="rv-cart-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Cart
+        </a>
+      </li>
+    </ul>
+
     <button class="rv-hamburger" id="rv-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -203,7 +204,7 @@
 </header>
 
 <div class="rv-mobile-menu" id="rv-mobile-menu">
-  <a href="{{ routes.root_url }}">Home</a>
+  <a href="/">Home</a>
   <a href="/collections/all">Shop</a>
   <a href="/pages/our-commitment">Our Commitment</a>
   <a href="/pages/our-story">Our Story</a>
@@ -213,16 +214,12 @@
 <script>
   const rvHeader = document.getElementById('rv-header');
   window.addEventListener('scroll', () => {
-    rvHeader.classList.toggle('scrolled', window.scrollY > 40);
+    rvHeader.classList.toggle('scrolled', window.scrollY > 10);
   });
-  const rvHamburger = document.getElementById('rv-hamburger');
-  const rvMobileMenu = document.getElementById('rv-mobile-menu');
-  rvHamburger.addEventListener('click', () => {
-    rvHamburger.classList.toggle('open');
-    rvMobileMenu.classList.toggle('open');
+  const rvBurger = document.getElementById('rv-hamburger');
+  const rvMob = document.getElementById('rv-mobile-menu');
+  rvBurger.addEventListener('click', () => {
+    rvBurger.classList.toggle('open');
+    rvMob.classList.toggle('open');
   });
-  rvMobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
-    rvHamburger.classList.remove('open');
-    rvMobileMenu.classList.remove('open');
-  }));
 </script>

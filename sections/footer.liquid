@@ -2,172 +2,153 @@
   .rv-footer {
     background: #1E1610;
     padding: 80px 40px 40px;
-    position: relative;
-    overflow: hidden;
   }
 
-  .rv-footer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #D4A853 30%, #7A9E8E 70%, transparent);
-  }
-
-  .rv-footer-grid {
+  .rv-footer-top {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr 1fr;
     gap: 60px;
     padding-bottom: 60px;
     border-bottom: 1px solid rgba(247,242,234,0.08);
   }
 
-  .rv-footer-logo-wrap {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 25px;
-    opacity: 0.85;
-    transition: opacity 0.3s;
+  .rv-footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #F7F2EA;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
   }
 
-  .rv-footer-logo-wrap:hover { opacity: 1; }
-  .rv-footer-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
-
   .rv-footer-tagline {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
     font-style: italic;
     font-weight: 300;
-    color: rgba(247,242,234,0.55);
+    color: rgba(247,242,234,0.45);
     line-height: 1.8;
-    max-width: 240px;
     margin-bottom: 28px;
   }
 
   .rv-footer-social {
     display: flex;
-    gap: 14px;
+    gap: 12px;
   }
 
   .rv-footer-social a {
-    width: 38px;
-    height: 38px;
-    border: 1px solid rgba(247,242,234,0.15);
+    width: 36px; height: 36px;
+    border: 1px solid rgba(247,242,234,0.12);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(247,242,234,0.45);
+    color: rgba(247,242,234,0.4);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
   }
 
   .rv-footer-social a:hover {
-    border-color: #D4A853;
-    color: #D4A853;
-    transform: translateY(-2px);
+    border-color: #C8813A;
+    color: #C8813A;
   }
 
-  .rv-footer-col-title {
-    font-family: 'DM Sans', sans-serif;
+  .rv-footer-col h4 {
+    font-family: 'Jost', sans-serif;
     font-size: 0.6rem;
     font-weight: 400;
-    color: #D4A853;
+    color: #C8813A;
     letter-spacing: 4px;
     text-transform: uppercase;
     margin-bottom: 22px;
   }
 
-  .rv-footer-links {
+  .rv-footer-col ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0; margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 12px;
   }
 
-  .rv-footer-links a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
+  .rv-footer-col a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
     font-weight: 300;
-    color: rgba(247,242,234,0.45);
+    color: rgba(247,242,234,0.42);
     text-decoration: none;
-    transition: color 0.25s ease;
+    transition: color 0.25s;
   }
 
-  .rv-footer-links a:hover { color: #F7F2EA; }
+  .rv-footer-col a:hover { color: #F7F2EA; }
 
   .rv-footer-bottom {
     max-width: 1200px;
     margin: 28px auto 0;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    align-items: center;
     flex-wrap: wrap;
+    gap: 16px;
   }
 
   .rv-footer-copy {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
     font-weight: 300;
-    color: rgba(247,242,234,0.25);
+    color: rgba(247,242,234,0.22);
     letter-spacing: 1px;
   }
 
-  .rv-footer-badges {
+  .rv-footer-pills {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
   }
 
-  .rv-footer-badge {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.58rem;
+  .rv-footer-pill {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.56rem;
     font-weight: 400;
-    color: rgba(247,242,234,0.22);
+    color: rgba(247,242,234,0.2);
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 4px 10px;
-    border: 1px solid rgba(247,242,234,0.08);
+    border: 1px solid rgba(247,242,234,0.07);
     border-radius: 20px;
   }
 
   @media (max-width: 768px) {
-    .rv-footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .rv-footer-top { grid-template-columns: 1fr; gap: 36px; }
     .rv-footer-bottom { flex-direction: column; text-align: center; }
   }
 </style>
 
 <footer class="rv-footer">
-  <div class="rv-footer-grid">
+  <div class="rv-footer-top">
     <div>
-      {% if section.settings.footer_logo != blank %}
-        <div class="rv-footer-logo-wrap">
-          <img src="{{ section.settings.footer_logo | img_url: '200x200' }}" alt="{{ shop.name }}">
-        </div>
-      {% endif %}
+      <p class="rv-footer-brand-name">{{ shop.name }}</p>
       <p class="rv-footer-tagline">Ancient wisdom.<br>Modern ritual.<br>Zero compromise.</p>
       <div class="rv-footer-social">
         {% if section.settings.email != blank %}
           <a href="mailto:{{ section.settings.email }}" aria-label="Email">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         {% endif %}
         {% if section.settings.instagram != blank %}
           <a href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
         {% endif %}
       </div>
     </div>
 
-    <div>
-      <p class="rv-footer-col-title">Navigate</p>
-      <ul class="rv-footer-links">
+    <div class="rv-footer-col">
+      <h4>Navigate</h4>
+      <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/collections/all">Shop</a></li>
         <li><a href="/pages/our-commitment">Our Commitment</a></li>
@@ -175,9 +156,9 @@
       </ul>
     </div>
 
-    <div>
-      <p class="rv-footer-col-title">Support</p>
-      <ul class="rv-footer-links">
+    <div class="rv-footer-col">
+      <h4>Support</h4>
+      <ul>
         {% if section.settings.email != blank %}
           <li><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
         {% endif %}
@@ -190,10 +171,10 @@
 
   <div class="rv-footer-bottom">
     <p class="rv-footer-copy">© {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.</p>
-    <div class="rv-footer-badges">
-      <span class="rv-footer-badge">100% Organic</span>
-      <span class="rv-footer-badge">Plastic-Free</span>
-      <span class="rv-footer-badge">Cold-Pressed</span>
+    <div class="rv-footer-pills">
+      <span class="rv-footer-pill">100% Organic</span>
+      <span class="rv-footer-pill">Plastic-Free</span>
+      <span class="rv-footer-pill">Cold-Pressed</span>
     </div>
   </div>
 </footer>
@@ -202,7 +183,6 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "image_picker", "id": "footer_logo", "label": "Footer Logo" },
     { "type": "text", "id": "email", "label": "Email Address" },
     { "type": "url", "id": "instagram", "label": "Instagram URL" }
   ],
