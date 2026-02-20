@@ -1,0 +1,123 @@
+<style>
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+  }
+
+  .cart-drawer.active {
+    right: 0;
+  }
+
+  .cart-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 9998;
+  }
+
+  .cart-drawer-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cart-drawer-header {
+    padding: 30px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-drawer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #2c2c2c;
+  }
+
+  .cart-drawer-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-drawer-close:hover {
+    color: #2c2c2c;
+  }
+
+  .cart-drawer-items {
+    padding: 30px;
+  }
+
+  .cart-drawer-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+  }
+</style>
+
+<div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Your Cart</h2>
+    <button class="cart-drawer-close" id="cart-drawer-close">×</button>
+  </div>
+  <div class="cart-drawer-items" id="cart-drawer-items">
+    <p class="cart-drawer-empty">Your cart is empty</p>
+  </div>
+</div>
+
+<script>
+  // Cart drawer functionality
+  const cartButton = document.getElementById('cart-icon-bubble');
+  const cartDrawer = document.getElementById('cart-drawer');
+  const cartOverlay = document.getElementById('cart-drawer-overlay');
+  const cartClose = document.getElementById('cart-drawer-close');
+
+  function openCart() {
+    cartDrawer.classList.add('active');
+    cartOverlay.classList.add('active');
+  }
+
+  function closeCart() {
+    cartDrawer.classList.remove('active');
+    cartOverlay.classList.remove('active');
+  }
+
+  if (cartButton) {
+    cartButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      openCart();
+    });
+  }
+
+  if (cartClose) {
+    cartClose.addEventListener('click', closeCart);
+  }
+
+  if (cartOverlay) {
+    cartOverlay.addEventListener('click', closeCart);
+  }
+</script>

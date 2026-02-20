@@ -1,0 +1,275 @@
+<style>
+  .product-main {
+    padding: 100px 20px;
+    background: #fafafa;
+    min-height: 80vh;
+  }
+
+  .product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .product-images {
+    position: sticky;
+    top: 100px;
+  }
+
+  .product-image-main {
+    width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    background: white;
+    padding: 20px;
+  }
+
+  .product-details {
+    padding: 40px 0;
+  }
+
+  .product-vendor {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #C9A56A;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  .product-title-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .product-price-main {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #C9A56A;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+
+  .product-description-main {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+
+  .product-form {
+    margin-bottom: 30px;
+  }
+
+  .product-variant-selector {
+    margin-bottom: 20px;
+  }
+
+  .variant-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .variant-select {
+    width: 100%;
+    padding: 15px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    color: #2c2c2c;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+
+  .variant-select:hover,
+  .variant-select:focus {
+    border-color: #C9A56A;
+    outline: none;
+  }
+
+  .quantity-selector {
+    margin-bottom: 20px;
+  }
+
+  .quantity-input {
+    width: 100px;
+    padding: 15px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .add-to-cart-button {
+    width: 100%;
+    padding: 18px 50px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .add-to-cart-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #C9A56A;
+    transition: left 0.4s ease;
+    z-index: -1;
+  }
+
+  .add-to-cart-button:hover::before {
+    left: 0;
+  }
+
+  .add-to-cart-button:hover {
+    color: #1a1614;
+  }
+
+  .add-to-cart-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    .product-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .product-images {
+      position: relative;
+      top: 0;
+    }
+
+    .product-title-main {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<section class="product-main">
+  <div class="product-container">
+    <div class="product-images">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | img_url: '800x800' }}" alt="{{ product.title }}" class="product-image-main">
+      {% else %}
+        <img src="https://via.placeholder.com/800x800/fafafa/C9A56A?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="product-image-main">
+      {% endif %}
+    </div>
+
+    <div class="product-details">
+      {% if product.vendor %}
+        <p class="product-vendor">{{ product.vendor }}</p>
+      {% endif %}
+      
+      <h1 class="product-title-main">{{ product.title }}</h1>
+      
+      <p class="product-price-main">
+        <span id="product-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      </p>
+
+      {% if product.description != blank %}
+        <div class="product-description-main">
+          {{ product.description }}
+        </div>
+      {% endif %}
+
+      {% form 'product', product, id: 'product-form', class: 'product-form' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% unless product.has_only_default_variant %}
+          <div class="product-variant-selector">
+            <label for="variant-selector" class="variant-label">Select Variant</label>
+            <select name="id" id="variant-selector" class="variant-select">
+              {% for variant in product.variants %}
+                <option 
+                  value="{{ variant.id }}" 
+                  {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                  {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endunless %}
+
+        <div class="quantity-selector">
+          <label for="quantity" class="variant-label">Quantity</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
+        </div>
+
+        <button 
+          type="submit" 
+          name="add" 
+          class="add-to-cart-button"
+          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}
+            Add to Cart
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Update price when variant changes
+  const variantSelector = document.getElementById('variant-selector');
+  if (variantSelector) {
+    variantSelector.addEventListener('change', function() {
+      const selectedOption = this.options[this.selectedIndex];
+      const priceElement = document.getElementById('product-price');
+      const addToCartButton = document.querySelector('.add-to-cart-button');
+      
+      // Update button state
+      if (selectedOption.disabled) {
+        addToCartButton.disabled = true;
+        addToCartButton.textContent = 'Sold Out';
+      } else {
+        addToCartButton.disabled = false;
+        addToCartButton.textContent = 'Add to Cart';
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": []
+}
+{% endschema %}

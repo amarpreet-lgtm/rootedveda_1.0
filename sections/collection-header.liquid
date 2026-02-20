@@ -1,0 +1,48 @@
+<style>
+  .collection-header {
+    padding: 120px 20px 80px;
+    background: linear-gradient(180deg, #1a1614 0%, #2d2520 100%);
+    text-align: center;
+  }
+
+  .collection-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: #C9A56A;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+  }
+
+  .collection-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #b8b8b8;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 768px) {
+    .collection-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<section class="collection-header">
+  <div class="container">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p class="collection-description">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Header",
+  "settings": []
+}
+{% endschema %}

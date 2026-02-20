@@ -1,0 +1,204 @@
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 !important;
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #1a1614 0%, #2d2520 100%);
+    overflow: hidden;
+    left: 0;
+    right: 0;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(201, 165, 106, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(74, 107, 86, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 900px;
+    z-index: 2;
+    animation: fadeIn 1.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-container {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .hero-logo {
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(201, 165, 106, 0.3));
+  }
+
+  .divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A56A, transparent);
+    margin: 30px auto;
+  }
+
+  .hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #d4d4d4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .hero-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 2;
+    color: #b8b8b8;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 18px 50px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #C9A56A;
+    transition: left 0.4s ease;
+    z-index: -1;
+  }
+
+  .cta-button:hover::before {
+    left: 0;
+  }
+
+  .cta-button:hover {
+    color: #1a1614;
+    border-color: #C9A56A;
+  }
+
+  @media (max-width: 768px) {
+    .hero-logo {
+      width: 200px;
+      height: 200px;
+    }
+  }
+</style>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="logo-container">
+      <div class="hero-logo">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | img_url: '600x600' }}" alt="{{ shop.name }}">
+        {% else %}
+          <img src="https://via.placeholder.com/320x320/1a1614/C9A56A?text=Logo" alt="{{ shop.name }}">
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="divider"></div>
+    <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+    
+    <p class="hero-description">
+      {{ section.settings.description }}
+    </p>
+    
+    <a href="{{ section.settings.button_link }}" class="cta-button">{{ section.settings.button_text }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Ancient Knowledge • Simple Ritual"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Ayurvedic beauty handcrafted for you. Experience the transformative power of nature's knowledge, cultivated over five millennia."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

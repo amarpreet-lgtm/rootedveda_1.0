@@ -1,0 +1,75 @@
+/* Base Styles */
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+.skip-to-content-link:focus {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  color: #C9A56A;
+  background-color: #1a1614;
+  padding: 12px;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+}
+
+/* Fade in animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #C9A56A;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #C9A56A;
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Text selection */
+::selection {
+  background: #C9A56A;
+  color: #1a1614;
+}

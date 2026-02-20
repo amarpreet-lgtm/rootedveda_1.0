@@ -1,0 +1,99 @@
+<style>
+  .testimonial-section {
+    padding: 140px 20px;
+    background: #2d2520;
+    position: relative;
+    width: 100%;
+    margin: 0 !important;
+    left: 0;
+    right: 0;
+  }
+
+  .testimonial-section::before {
+    content: '"';
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15rem;
+    color: rgba(201, 165, 106, 0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .testimonial {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 2;
+    color: #d4d4d4;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  .testimonial-author {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #C9A56A;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-text {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+<section class="testimonial-section">
+  <div class="container">
+    <div class="testimonial">
+      <p class="testimonial-text">
+        "{{ section.settings.testimonial_text }}"
+      </p>
+      <p class="testimonial-author">{{ section.settings.author_name }}{% if section.settings.author_title != blank %} · {{ section.settings.author_title }}{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "testimonial_text",
+      "label": "Testimonial Text",
+      "default": "Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author Name",
+      "default": "Sarah Mansoor"
+    },
+    {
+      "type": "text",
+      "id": "author_title",
+      "label": "Author Title",
+      "default": "Nurse Practitioner"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial"
+    }
+  ]
+}
+{% endschema %}

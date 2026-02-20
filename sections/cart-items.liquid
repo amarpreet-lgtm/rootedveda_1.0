@@ -1,0 +1,277 @@
+<style>
+  .cart-section {
+    padding: 100px 20px;
+    background: #fafafa;
+    min-height: 60vh;
+  }
+
+  .cart-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .cart-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .cart-empty-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .continue-shopping {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .continue-shopping:hover {
+    background: #C9A56A;
+    color: #fff;
+  }
+
+  .cart-items {
+    margin-bottom: 40px;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 30px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  }
+
+  .cart-item-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .cart-item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cart-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-variant {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 15px;
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .quantity-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .quantity-input-cart {
+    width: 80px;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .cart-item-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .cart-item-price-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    color: #C9A56A;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  .cart-item-remove {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .cart-item-remove:hover {
+    color: #C9A56A;
+  }
+
+  .cart-footer {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  }
+
+  .cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .cart-subtotal-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #2c2c2c;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .cart-subtotal-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #C9A56A;
+    font-weight: 500;
+  }
+
+  .cart-checkout-button {
+    width: 100%;
+    padding: 18px 50px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+  }
+
+  .cart-checkout-button:hover {
+    background: #C9A56A;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .cart-item {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .cart-item-price {
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<section class="cart-section">
+  <div class="cart-container">
+    <h1 class="cart-title">Your Cart</h1>
+
+    {% if cart.item_count == 0 %}
+      <div class="cart-empty">
+        <p class="cart-empty-text">Your cart is currently empty.</p>
+        <a href="/collections/all" class="continue-shopping">Continue Shopping</a>
+      </div>
+    {% else %}
+      <form action="{{ routes.cart_url }}" method="post">
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <div class="cart-item">
+              <img src="{{ item.image | img_url: '200x200' }}" alt="{{ item.title }}" class="cart-item-image">
+              
+              <div class="cart-item-details">
+                <h3 class="cart-item-title">{{ item.product.title }}</h3>
+                {% if item.variant.title != 'Default Title' %}
+                  <p class="cart-item-variant">{{ item.variant.title }}</p>
+                {% endif %}
+                <div class="cart-item-quantity">
+                  <span class="quantity-label">Quantity:</span>
+                  <input 
+                    type="number" 
+                    name="updates[]" 
+                    id="updates_{{ item.key }}" 
+                    value="{{ item.quantity }}" 
+                    min="0" 
+                    class="quantity-input-cart"
+                    onchange="this.form.submit()">
+                </div>
+              </div>
+
+              <div class="cart-item-price">
+                <p class="cart-item-price-amount">{{ item.final_line_price | money }}</p>
+                <button type="submit" name="updates[]" value="0" class="cart-item-remove">Remove</button>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="cart-footer">
+          <div class="cart-subtotal">
+            <span class="cart-subtotal-label">Subtotal</span>
+            <span class="cart-subtotal-amount">{{ cart.total_price | money }}</span>
+          </div>
+          
+          <button type="submit" name="checkout" class="cart-checkout-button">
+            Proceed to Checkout
+          </button>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Items",
+  "settings": []
+}
+{% endschema %}

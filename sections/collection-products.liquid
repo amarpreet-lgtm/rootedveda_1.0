@@ -1,0 +1,148 @@
+<style>
+  .collection-products {
+    padding: 80px 20px 140px;
+    background: #fafafa;
+  }
+
+  .collection-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+  }
+
+  .collection-product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+
+  .collection-product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .collection-product-image {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    background: white;
+    padding: 30px;
+  }
+
+  .collection-product-info {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .collection-product-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin-bottom: 15px;
+  }
+
+  .collection-product-price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #C9A56A;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .collection-product-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .collection-product-button:hover {
+    background: #C9A56A;
+    color: #fff;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .pagination a {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 0 5px;
+    background: transparent;
+    color: #C9A56A;
+    text-decoration: none;
+    border: 2px solid #C9A56A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .pagination a:hover {
+    background: #C9A56A;
+    color: #fff;
+  }
+</style>
+
+<section class="collection-products">
+  <div class="collection-grid">
+    {% for product in collection.products %}
+      <div class="collection-product-card">
+        <a href="{{ product.url }}">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="collection-product-image">
+          {% else %}
+            <img src="https://via.placeholder.com/600x600/fafafa/C9A56A?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="collection-product-image">
+          {% endif %}
+        </a>
+        <div class="collection-product-info">
+          <h3 class="collection-product-title">{{ product.title }}</h3>
+          <p class="collection-product-price">{{ product.price | money }}</p>
+          <a href="{{ product.url }}" class="collection-product-button">View Product</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    <div class="pagination">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}">← Previous</a>
+      {% endif %}
+      
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a href="{{ part.url }}">{{ part.title }}</a>
+        {% else %}
+          <span>{{ part.title }}</span>
+        {% endif %}
+      {% endfor %}
+      
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}">Next →</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": []
+}
+{% endschema %}
