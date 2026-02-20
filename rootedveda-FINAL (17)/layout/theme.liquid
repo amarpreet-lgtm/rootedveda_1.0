@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#F7F2EA">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {{ content_for_header }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    <style>
+      :root {
+        --white:  #ffffff;
+        --cream:  #FAF7F3;
+        --sand:   #F2EBE1;
+        --blush:  #E8C4A8;
+        --rose:   #DEBDBD;
+        --sage:   #B5CEBD;
+        --walnut: #2C1F14;
+        --brown:  #8C7060;
+        --amber:  #C8813A;
+        --gold:   #D4A853;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; width: 100%; }
+
+      body {
+        font-family: 'Jost', sans-serif;
+        line-height: 1.8;
+        color: #1E1610;
+        background: #ffffff;
+        overflow-x: hidden;
+      }
+
+      img { max-width: 100%; height: auto; display: block; }
+
+      ::selection { background: #D4A853; color: #1E1610; }
+      *:focus-visible { outline: 1px solid #C8813A; outline-offset: 3px; }
+
+      .visually-hidden {
+        position: absolute !important;
+        overflow: hidden;
+        width: 1px; height: 1px;
+        margin: -1px; padding: 0; border: 0;
+        clip: rect(0 0 0 0);
+      }
+
+      .skip-to-content-link:focus {
+        clip: auto; width: auto; height: auto;
+        position: absolute; top: 0; left: 0;
+        padding: 12px 20px; z-index: 10000;
+        background: #1E1610; color: #D4A853;
+        text-decoration: none; font-family: 'Jost', sans-serif;
+        font-size: 0.8rem; letter-spacing: 2px;
+      }
+    </style>
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">Skip to content</a>
+
+    {% render 'header-nav' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    {% render 'cart-drawer' %}
+
+    <script>
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}'
+      };
+    </script>
+  </body>
+</html>

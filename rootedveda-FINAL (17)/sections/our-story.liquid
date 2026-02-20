@@ -1,0 +1,264 @@
+<style>
+  .rv-story {
+    background: #FAF7F3;
+    min-height: 100vh;
+  }
+
+  .rv-story-hero {
+    background: linear-gradient(160deg, #1E1610 0%, #2A1A0E 60%, #1E1610 100%);
+    padding: 140px 40px 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rv-story-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 60%, rgba(200,129,58,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .rv-story-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 300;
+    color: #C8813A;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.85;
+  }
+
+  .rv-story-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    color: #2C1F14;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .rv-story-hero h1 em {
+    font-style: italic;
+    color: #C8813A;
+  }
+
+  .rv-story-hero-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(247,242,234,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .rv-story-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C8813A, transparent);
+    margin: 28px auto;
+  }
+
+  /* Content sections */
+  .rv-story-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 90px 40px;
+  }
+
+  .rv-story-block {
+    margin-bottom: 80px;
+  }
+
+  .rv-story-block-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #C8813A;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rv-story-block-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212,168,83,0.3), transparent);
+  }
+
+  .rv-story-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    color: #2C1F14;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .rv-story-block h2 em {
+    font-style: italic;
+    color: #C8813A;
+  }
+
+  .rv-story-block p {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #8C7060;
+    line-height: 1.95;
+    margin-bottom: 18px;
+  }
+
+  /* Founder callout */
+  .rv-story-callout {
+    background: #FAF7F3;
+    padding: 60px 50px;
+    margin: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rv-story-callout::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem;
+    color: rgba(212,168,83,0.07);
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .rv-story-callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(247,242,234,0.85);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .rv-story-callout-author {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: #C8813A;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Values grid */
+  .rv-story-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 50px;
+    background: rgba(180,150,120,0.15);
+  }
+
+  .rv-story-value {
+    background: #FAF7F3;
+    padding: 36px 32px;
+    transition: background 0.3s;
+  }
+
+  .rv-story-value:hover { background: #EFE8DA; }
+
+  .rv-story-value-icon {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .rv-story-value h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #2C1F14;
+    margin-bottom: 10px;
+  }
+
+  .rv-story-value p {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: #8C7060;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .rv-story-body { padding: 60px 24px; }
+    .rv-story-hero { padding: 130px 24px 70px; }
+    .rv-story-callout { padding: 40px 28px; }
+    .rv-story-values { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="rv-story">
+  <div class="rv-story-hero">
+    <p class="rv-story-eyebrow">Our Story</p>
+    <div class="rv-story-divider"></div>
+    <h1>Where <em>Ancient Wisdom</em><br>Meets Modern Skin</h1>
+    <p class="rv-story-hero-sub">Rooted in Ayurveda · Crafted with Purpose</p>
+  </div>
+
+  <div class="rv-story-body">
+
+    <div class="rv-story-block">
+      <p class="rv-story-block-label">The Beginning</p>
+      <h2>A Nurse Practitioner's <em>Quest</em></h2>
+      <p>Rooted Veda was born from a deeply personal search. As a nurse practitioner, I spent years watching patients navigate the confusing, often overwhelming world of skincare — products full of synthetic fillers, hormone-disrupting preservatives, and ingredients that do more harm than good over time.</p>
+      <p>I wanted something different. Something that worked with the body's natural intelligence rather than against it. I turned to Ayurveda — the 5,000-year-old science of life — and found answers that modern cosmetic science had been quietly rediscovering for decades.</p>
+    </div>
+
+    <div class="rv-story-callout">
+      <p class="rv-story-callout-text">"I didn't set out to create a skincare brand. I set out to find something honest — a formula I could put on my own face and recommend to my patients without hesitation."</p>
+      <p class="rv-story-callout-author">— Founder, Rooted Veda</p>
+    </div>
+
+    <div class="rv-story-block">
+      <p class="rv-story-block-label">The Formula</p>
+      <h2>Four Ingredients. <em>No Compromise.</em></h2>
+      <p>Nature's Botox Ayurvedic Face Oil contains exactly four cold-pressed, organic botanicals — each chosen because centuries of Ayurvedic tradition and modern clinical research both point to the same conclusion: they work. No fillers. No synthetic fragrance. No preservatives. Just oil that earns its place on your face.</p>
+      <p>Every batch is made in small quantities to ensure freshness and potency. We use amber glass to protect the active compounds from light degradation. The dropper delivers exactly what you need — one step, morning or night.</p>
+    </div>
+
+    <div class="rv-story-block">
+      <p class="rv-story-block-label">Our Values</p>
+      <h2>What We <em>Stand For</em></h2>
+      <div class="rv-story-values">
+        <div class="rv-story-value">
+          <div class="rv-story-value-icon">🌿</div>
+          <h3>100% Organic</h3>
+          <p>Every ingredient is certified organic and cold-pressed to preserve its full nutritional and therapeutic potency.</p>
+        </div>
+        <div class="rv-story-value">
+          <div class="rv-story-value-icon">♻️</div>
+          <h3>Plastic-Free</h3>
+          <p>Amber glass bottle, minimal packaging. We believe luxury and sustainability aren't opposites — they're the same thing done right.</p>
+        </div>
+        <div class="rv-story-value">
+          <div class="rv-story-value-icon">🚫</div>
+          <h3>Hormone-Safe</h3>
+          <p>No endocrine disruptors, no synthetic preservatives, no parabens. Safe for all skin types including sensitive and hormonally-active skin.</p>
+        </div>
+        <div class="rv-story-value">
+          <div class="rv-story-value-icon">🏺</div>
+          <h3>Rooted in Ayurveda</h3>
+          <p>Five thousand years of botanical wisdom informs every formulation decision we make. Ancient knowledge. Modern results.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

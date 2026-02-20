@@ -1,0 +1,192 @@
+<style>
+  .products-section {
+    padding: 140px 20px;
+    background: linear-gradient(180deg, #F0E8D8 0%, #F7F2EA 100%);
+    width: 100%;
+    margin: 0 !important;
+    left: 0;
+    right: 0;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 80px;
+  }
+
+  .product-card {
+    background: #FEFCF8;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .product-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #2C1F14;
+    margin-bottom: 15px;
+  }
+
+  .product-price {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    color: #C8813A;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .product-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #C8813A;
+    text-decoration: none;
+    border: 2px solid #C8813A;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .product-button:hover {
+    background: #C8813A;
+    color: #fff;
+  }
+
+  .featured-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    margin-top: 80px;
+  }
+</style>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+      <p class="section-description">
+        {{ section.settings.description }}
+      </p>
+    </div>
+
+    {% if section.settings.featured_image != blank %}
+      <div style="text-align: center;">
+        <img src="{{ section.settings.featured_image | img_url: '1200x' }}" alt="{{ section.settings.title }}" class="featured-image">
+      </div>
+    {% else %}
+      <div class="product-grid">
+        {% if section.settings.collection != blank %}
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products limit: section.settings.products_to_show %}
+            <div class="product-card">
+              <a href="{{ product.url }}">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="product-image">
+                {% else %}
+                  <img src="https://via.placeholder.com/600x600/EEE7DC/C9A46B?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="product-image">
+                {% endif %}
+              </a>
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <p class="product-price">{{ product.price | money }}</p>
+                <a href="{{ product.url }}" class="product-button">View Product</a>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for product in collections.all.products limit: section.settings.products_to_show %}
+            <div class="product-card">
+              <a href="{{ product.url }}">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="product-image">
+                {% else %}
+                  <img src="https://via.placeholder.com/600x600/EEE7DC/C9A46B?text={{ product.title | url_encode }}" alt="{{ product.title }}" class="product-image">
+                {% endif %}
+              </a>
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <p class="product-price">{{ product.price | money }}</p>
+                <a href="{{ product.url }}" class="product-button">View Product</a>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Nature's Botox"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Meticulously crafted formulations that honor tradition while embracing the needs of modern life."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 3
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Image (Optional - will replace product grid)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

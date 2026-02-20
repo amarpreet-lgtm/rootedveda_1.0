@@ -1,0 +1,315 @@
+<style>
+  .product-standards {
+    padding: 100px 20px 60px;
+    background: #F0E8D8;
+  }
+
+  .standards-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #2C1F14;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .standards-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .standard-item {
+    text-align: center;
+  }
+
+  .standard-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .standard-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2C1F14;
+    margin-bottom: 10px;
+  }
+
+  .standard-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* Dropdown Accordion Styles */
+  .product-details-accordion {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+  }
+
+  .accordion-item {
+    border-bottom: 2px solid #C9B99E;
+    margin-bottom: 0;
+  }
+
+  .accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2C1F14;
+    text-align: left;
+    transition: color 0.3s ease;
+  }
+
+  .accordion-header:hover {
+    color: #C8813A;
+  }
+
+  .accordion-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+    color: #C8813A;
+    font-weight: bold;
+  }
+
+  .accordion-icon.active {
+    transform: rotate(180deg);
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-content.active {
+    max-height: 2000px;
+    padding-bottom: 20px;
+  }
+
+  .accordion-inner {
+    padding: 0 0 10px 0;
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  .accordion-inner h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2C1F14;
+    margin: 15px 0 10px;
+  }
+
+  .accordion-inner ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+
+  .accordion-inner li {
+    margin-bottom: 8px;
+  }
+
+  .accordion-inner strong {
+    color: #2C1F14;
+  }
+</style>
+
+<section class="product-standards">
+  <div class="container">
+    <h2 class="standards-title">Product Standards</h2>
+    <div class="standards-grid">
+      <div class="standard-item">
+        <div class="standard-icon">🌱</div>
+        <h3 class="standard-heading">100% Organic</h3>
+        <p class="standard-description">Raw, plant-based power</p>
+      </div>
+      <div class="standard-item">
+        <div class="standard-icon">🔬</div>
+        <h3 class="standard-heading">Cold-Pressed</h3>
+        <p class="standard-description">Maximum nutrient density</p>
+      </div>
+      <div class="standard-item">
+        <div class="standard-icon">🌎</div>
+        <h3 class="standard-heading">Plastic-Free</h3>
+        <p class="standard-description">Amber glass & zero waste</p>
+      </div>
+      <div class="standard-item">
+        <div class="standard-icon">✨</div>
+        <h3 class="standard-heading">Universal Care</h3>
+        <p class="standard-description">Safe for all skin types, including sensitive</p>
+      </div>
+    </div>
+
+    <!-- Dropdown Accordion Sections -->
+    <div class="product-details-accordion">
+      
+      <!-- The Core Four Ingredients -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          The "Core Four" Ingredients
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <ul>
+              <li><strong>Jojoba:</strong> Balances and clears.</li>
+              <li><strong>Sweet Almond:</strong> Glow and Vitamin E.</li>
+              <li><strong>Castor:</strong> Deep plumping and collagen support.</li>
+              <li><strong>Frankincense:</strong> Tightens pores and lifts.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Ingredient List -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Full Ingredient List (INCI)
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <p>*Certified Organic Jojoba (Simmondsia Chinensis) Seed Oil, *Certified Organic Almond Prunus Amygdalus Dulcis Oil, Castor (Ricinus Communis) Seed Oil, 100% Pure Frankincense (Boswellia Carterii) Oil.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Purity Standards -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Our Purity Standards
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <p><strong>Cold-Pressed:</strong> We never use heat or chemicals to extract our oils. This preserves the Prana (life force) and biological potency of the plants.</p>
+            <p><strong>Hexane-Free:</strong> Our Castor oil is extracted naturally to ensure zero chemical residue.</p>
+            <p><strong>Hormone-Safe Packaging:</strong> Housed in Inert Amber Glass to guarantee you are 100% Microplastic-Free. No chances of your skin being exposed to leached endocrine disruptors.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Amber Glass Difference -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          The Amber Glass Difference
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <p>We don't just protect your skin; we protect the formula.</p>
+            <ul>
+              <li><strong>Blocks UV Rays:</strong> Keeps the cold-pressed oils active and potent.</li>
+              <li><strong>Microplastic-Free:</strong> Glass is inert, ensuring zero chemicals "mess up" the oil.</li>
+              <li><strong>Hormone-Safe & Inert:</strong> Zero risk of microplastics or endocrine disruptors leaching into your oil.</li>
+              <li><strong>Infinite Recyclability:</strong> Kind to your vanity, kinder to the planet.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Use -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          How to Use
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <p>Experience the full power of Nature's Botox in one simple, daily step. For the best results, we recommend a "less is more" approach.</p>
+            
+            <h4>1. Prep</h4>
+            <p>Start with a clean face. While your skin is still slightly damp (from water or a floral mist), you are ready to apply.</p>
+            <p><em>Why?</em> Damp skin acts as a carrier, helping the cold-pressed oils absorb deeper into the dermis.</p>
+            
+            <h4>2. Activate</h4>
+            <p>Dispense 2–4 drops into the palm of your hand. Gently rub your palms together to warm the oil; this "activates" the Frankincense and prepares the nutrients for your skin.</p>
+            
+            <h4>3. Press & Lift</h4>
+            <p>Gently press your palms onto your face, neck, and décolletage. Use upward, sweeping motions to encourage lymphatic drainage and support the "lifting" effect.</p>
+            <p><em>Tip:</em> For an extra "Botox" boost, spend an extra 30 seconds massaging your jawline and forehead.</p>
+            
+            <h4>4. Absorb</h4>
+            <p>Allow 1–2 minutes for the oil to fully sink in before applying SPF or makeup. Because our formula is 100% microplastic-free and housed in inert glass, you can rest easy knowing your pores are absorbing only pure, botanical goodness.</p>
+            
+            <h4>When to Use</h4>
+            <ul>
+              <li><strong>Morning:</strong> To protect, brighten, and provide a radiant base for the day.</li>
+              <li><strong>Night:</strong> To support cellular renewal and deep structural plumping while you sleep.</li>
+            </ul>
+            
+            <h4>Enhance with Tools (Optional)</h4>
+            <p>The "Core Four" blend provides the perfect "slip" for facial massage without clogging pores. You can use this oil with a Gua Sha, face roller, or traditional Ayurveda Kansa Wand to:</p>
+            <ul>
+              <li>Increase blood flow and the "Botox" firming effect.</li>
+              <li>Depuff and define facial contours.</li>
+              <li>Help the oil penetrate deeper into the skin's layers.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping -->
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Shipping
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            <ul>
+              <li><strong>Fast & Free:</strong> Enjoy Free Shipping on all orders over $49! Order the Duo Pack today and we'll cover the shipping costs.</li>
+              <li><strong>Plastic-Free Delivery:</strong> Arrives in compostable, earth-friendly packaging.</li>
+              <li><strong>Small-Batch Quality:</strong> Handcrafted and shipped with care within 1–4 business days.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleAccordion(button) {
+  const content = button.nextElementSibling;
+  const icon = button.querySelector('.accordion-icon');
+  const isActive = content.classList.contains('active');
+  
+  // Close all accordions
+  document.querySelectorAll('.accordion-content').forEach(item => {
+    item.classList.remove('active');
+  });
+  document.querySelectorAll('.accordion-icon').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // If this wasn't active, open it
+  if (!isActive) {
+    content.classList.add('active');
+    icon.classList.add('active');
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product Standards",
+  "settings": []
+}
+{% endschema %}

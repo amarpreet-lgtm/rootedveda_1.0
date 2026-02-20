@@ -1,0 +1,71 @@
+<style>
+  .rv-testimonial {
+    background: #FAF7F3;
+    padding: 100px 40px;
+    border-top: 1px solid rgba(180,150,120,0.15);
+    border-bottom: 1px solid rgba(180,150,120,0.15);
+  }
+
+  .rv-testimonial-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .rv-testimonial-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 32px;
+    color: #C8813A;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+
+  .rv-testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #2C1F14;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .rv-testimonial-rule {
+    width: 40px;
+    height: 1px;
+    background: #C8813A;
+    margin: 0 auto 20px;
+  }
+
+  .rv-testimonial-author {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: #8C7060;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+</style>
+
+<section class="rv-testimonial">
+  <div class="rv-testimonial-inner">
+    <div class="rv-testimonial-stars">★★★★★</div>
+    <p class="rv-testimonial-quote">"{{ section.settings.testimonial_text }}"</p>
+    <div class="rv-testimonial-rule"></div>
+    <p class="rv-testimonial-author">{{ section.settings.author_name }}{% if section.settings.author_title != blank %} &nbsp;·&nbsp; {{ section.settings.author_title }}{% endif %}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial",
+  "settings": [
+    { "type": "textarea", "id": "testimonial_text", "label": "Testimonial", "default": "Pure magic. It has softened my fine lines and made my skin feel more supple than creams twice the price. My skin just looks healthier and I constantly get compliments now. I'll never be without it!" },
+    { "type": "text", "id": "author_name", "label": "Author Name", "default": "Sarah Mansoor" },
+    { "type": "text", "id": "author_title", "label": "Author Title", "default": "Nurse Practitioner" }
+  ],
+  "presets": [{ "name": "Testimonial" }]
+}
+{% endschema %}

@@ -1,0 +1,350 @@
+<style>
+  /* ── HERO: centered, white, pastel ── */
+  .rv-hero {
+    background: #ffffff;
+    min-height: 94vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Soft pastel blobs in background */
+  .rv-hero-blob1 {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,210,190,0.35) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .rv-hero-blob2 {
+    position: absolute;
+    width: 450px; height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(195,214,206,0.28) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    pointer-events: none;
+  }
+
+  .rv-hero-blob3 {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,188,160,0.2) 0%, transparent 70%);
+    top: 40%; left: 5%;
+    pointer-events: none;
+  }
+
+  .rv-hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  /* Eyebrow */
+  .rv-hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #C8813A;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease-out forwards;
+  }
+
+  .rv-hero-eyebrow::before,
+  .rv-hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: rgba(200,129,58,0.35);
+  }
+
+  /* Bottle */
+  .rv-hero-bottle-wrap {
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease-out forwards;
+  }
+
+
+
+  .rv-hero-bottle {
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+    animation: floatBottle 7s ease-in-out infinite;
+    filter: drop-shadow(0 20px 50px rgba(140,112,96,0.18));
+  }
+
+  @keyframes floatBottle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Headline */
+  .rv-hero-headline {
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease-out forwards;
+  }
+
+  .rv-hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    color: #2C1F14;
+    line-height: 1.0;
+    letter-spacing: -1px;
+  }
+
+  .rv-hero-h1 em {
+    font-style: italic;
+    color: #C8813A;
+  }
+
+  /* Subtitle */
+  .rv-hero-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: #A08878;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease-out forwards;
+  }
+
+  /* Stats */
+  .rv-hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease-out forwards;
+    border: 1px solid rgba(180,150,120,0.2);
+    border-radius: 60px;
+    overflow: hidden;
+  }
+
+  .rv-stat-item {
+    padding: 12px 28px;
+    text-align: center;
+    border-right: 1px solid rgba(180,150,120,0.2);
+  }
+
+  .rv-stat-item:last-child { border-right: none; }
+
+  .rv-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #2C1F14;
+    line-height: 1;
+    display: block;
+  }
+
+  .rv-stat-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.54rem;
+    font-weight: 300;
+    color: #A08878;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* CTAs */
+  .rv-hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s ease-out forwards;
+  }
+
+  .rv-btn-primary {
+    display: inline-block;
+    padding: 14px 38px;
+    background: #2C1F14;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+
+  .rv-btn-primary:hover { background: #AADD00; color: #1A0F08; }
+
+  .rv-btn-outline {
+    display: inline-block;
+    padding: 13px 32px;
+    background: transparent;
+    color: #2C1F14;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid rgba(44,31,20,0.25);
+    transition: all 0.3s ease;
+  }
+
+  .rv-btn-outline:hover {
+    border-color: #C8813A;
+    color: #C8813A;
+  }
+
+  /* Trust badges */
+  .rv-hero-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(180,150,120,0.15);
+    width: 100%;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease-out forwards;
+    flex-wrap: wrap;
+  }
+
+  .rv-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rv-trust-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  .rv-trust-dot.green  { background: #B5CEBD; }
+  .rv-trust-dot.peach  { background: #E8C4A8; }
+  .rv-trust-dot.rose   { background: #DEBDBD; }
+  .rv-trust-dot.sage2  { background: #C8813A; }
+
+  .rv-trust-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: #A08878;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .rv-hero { padding: 80px 20px 50px; }
+    .rv-hero-bottle { width: 150px; }
+    .rv-hero-ctas { flex-direction: column; gap: 12px; }
+    .rv-hero-stats { flex-wrap: wrap; border-radius: 12px; }
+    .rv-stat-item { border-right: none; border-bottom: 1px solid rgba(180,150,120,0.2); }
+    .rv-stat-item:last-child { border-bottom: none; }
+  }
+</style>
+
+<section class="rv-hero">
+  <div class="rv-hero-blob1"></div>
+  <div class="rv-hero-blob2"></div>
+  <div class="rv-hero-blob3"></div>
+
+  <div class="rv-hero-inner">
+
+    <div class="rv-hero-eyebrow">Ayurvedic Skincare</div>
+
+    <div class="rv-hero-bottle-wrap">
+      {% if section.settings.logo != blank %}
+        <img class="rv-hero-bottle" src="{{ section.settings.logo | img_url: '500x500' }}" alt="{{ shop.name }}">
+      {% else %}
+        <img class="rv-hero-bottle" src="{{ 'fulllogo_transparent_nobuffer.png' | asset_url }}" alt="{{ shop.name }}">
+      {% endif %}
+    </div>
+
+    <div class="rv-hero-headline">
+      <h1 class="rv-hero-h1">Nature's <em>Botox.</em></h1>
+    </div>
+
+    <p class="rv-hero-sub">{{ section.settings.subtitle }}</p>
+
+    <div class="rv-hero-stats">
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">4</span>
+        <span class="rv-stat-label">Ingredients</span>
+      </div>
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">100%</span>
+        <span class="rv-stat-label">Organic</span>
+      </div>
+      <div class="rv-stat-item">
+        <span class="rv-stat-num">1 oz</span>
+        <span class="rv-stat-label">Single Step</span>
+      </div>
+    </div>
+
+    <div class="rv-hero-ctas">
+      <a href="{{ section.settings.button_link }}" class="rv-btn-primary">{{ section.settings.button_text }}</a>
+      <a href="/pages/our-commitment" class="rv-btn-outline">Our Commitment</a>
+    </div>
+
+    <div class="rv-hero-trust">
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot green"></div>
+        <span class="rv-trust-label">100% Organic</span>
+      </div>
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot peach"></div>
+        <span class="rv-trust-label">Plastic Free</span>
+      </div>
+      <div class="rv-trust-item">
+        <div class="rv-trust-dot rose"></div>
+        <span class="rv-trust-label">Hormone Safe</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Product Image" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Potent by Nature · Minimal by Design" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "Shop Now" },
+    { "type": "url", "id": "button_link", "label": "Button Link", "default": "/collections/all" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
